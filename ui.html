@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX — Training System</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0a0a08;
+  --off-black: #111110;
+  --card-bg: #161614;
+  --border: #2a2a26;
+  --border-light: #333330;
+  --text: #f0ede6;
+  --text-muted: #8a8880;
+  --text-dim: #555550;
+  --accent: #e8ff47;
+  --accent-dim: #c8df3a;
+  --run: #4ade80;
+  --cycle: #fb923c;
+  --swim: #38bdf8;
+  --lift: #c084fc;
+  --brick: #f87171;
+  --rest: #6b7280;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--off-black); }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 2px; }
+
+/* HEADER */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 2rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10,10,8,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--border);
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.header-stat-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  font-family: 'DM Mono', monospace;
+}
+
+.header-stat-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+}
+
+.status-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--run);
+  box-shadow: 0 0 8px var(--run);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* HERO */
+.hero {
+  padding: 120px 2rem 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 8vw, 96px);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.hero-title span {
+  color: var(--accent);
+}
+
+.hero-subtitle {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.5vw, 26px);
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  margin-top: 0.5rem;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.hero-stat {
+  background: var(--off-black);
+  padding: 1.25rem 1.5rem;
+  position: relative;
+}
+
+.hero-stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  line-height: 1;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.hero-stat-num span {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+.hero-stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-top: 4px;
+  font-family: 'DM Mono', monospace;
+}
+
+/* NAV TABS */
+.nav-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  padding: 0.85rem 1.5rem;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  cursor: pointer;
+  border: none;
+  background: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+  font-family: 'DM Mono', monospace;
+}
+
+.nav-tab:hover { color: var(--text-muted); }
+.nav-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* MAIN LAYOUT */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.panel { display: none; animation: fadeIn 0.3s ease; }
+.panel.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* SECTION LABEL */
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  margin: 2rem 0 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.5px solid var(--border);
+}
+
+/* DAY CARDS */
+.day-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.day-card {
+  background: var(--card-bg);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.day-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 12px 0 0 12px;
+}
+
+.day-card.run::before { background: var(--run); }
+.day-card.cycle::before { background: var(--cycle); }
+.day-card.lift::before { background: var(--lift); }
+.day-card.swim::before { background: var(--swim); }
+.day-card.brick::before { background: var(--brick); }
+.day-card.rest::before { background: var(--rest); }
+.day-card.arms::before { background: var(--accent); }
+
+.day-card:hover { border-color: var(--border-light); }
+
+.day-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.day-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--text);
+}
+
+.day-badges {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.badge {
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 0.5px solid;
+}
+
+.badge.run { color: var(--run); border-color: var(--run); background: rgba(74,222,128,0.08); }
+.badge.cycle { color: var(--cycle); border-color: var(--cycle); background: rgba(251,146,60,0.08); }
+.badge.lift { color: var(--lift); border-color: var(--lift); background: rgba(192,132,252,0.08); }
+.badge.swim { color: var(--swim); border-color: var(--swim); background: rgba(56,189,248,0.08); }
+.badge.brick { color: var(--brick); border-color: var(--brick); background: rgba(248,113,113,0.08); }
+.badge.rest { color: var(--rest); border-color: var(--rest); background: rgba(107,114,128,0.08); }
+.badge.arms { color: var(--accent); border-color: var(--accent); background: rgba(232,255,71,0.08); }
+
+.day-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.day-desc .hl {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.day-note {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 0.5rem;
+  font-family: 'DM Mono', monospace;
+  font-style: italic;
+}
+
+.day-metrics {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 0.5px solid var(--border);
+}
+
+.day-metric-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.day-metric-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  font-family: 'DM Mono', monospace;
+}
+
+/* GYM TABLE */
+.gym-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.gym-table th {
+  text-align: left;
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  padding: 0.5rem 0.75rem;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.gym-table td {
+  padding: 0.6rem 0.75rem;
+  font-size: 13px;
+  color: var(--text-muted);
+  border-bottom: 0.5px solid var(--border);
+  vertical-align: top;
+}
+
+.gym-table tr:last-child td { border-bottom: none; }
+
+.gym-table td:first-child {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.gym-table td:nth-child(2) {
+  font-family: 'DM Mono', monospace;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* PROGRESS BARS */
+.prog-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0;
+}
+
+.prog-label {
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text-muted);
+  width: 50px;
+  flex-shrink: 0;
+}
+
+.prog-track {
+  flex: 1;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.prog-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.prog-val {
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text-dim);
+  width: 65px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* DIET CARDS */
+.macro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.macro-card {
+  background: var(--card-bg);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.macro-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.macro-unit {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.macro-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  font-family: 'DM Mono', monospace;
+  margin-top: 4px;
+}
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.timeline-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -1.5rem;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--off-black);
+  transition: background 0.2s;
+}
+
+.timeline-item.unlocked .timeline-dot { background: var(--run); border-color: var(--run); box-shadow: 0 0 8px rgba(74,222,128,0.4); }
+.timeline-item.soon .timeline-dot { background: var(--cycle); border-color: var(--cycle); box-shadow: 0 0 8px rgba(251,146,60,0.3); }
+.timeline-item.future .timeline-dot { background: var(--border); border-color: var(--border-light); }
+
+.timeline-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.timeline-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-body {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.unlock-badge {
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border: 0.5px solid;
+}
+
+.unlock-badge.green { color: var(--run); border-color: var(--run); background: rgba(74,222,128,0.08); }
+.unlock-badge.amber { color: var(--cycle); border-color: var(--cycle); background: rgba(251,146,60,0.08); }
+.unlock-badge.red { color: var(--brick); border-color: var(--brick); background: rgba(248,113,113,0.08); }
+
+/* PROGRESSION TABLE */
+.prog-table-wrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 0.5px solid var(--border);
+}
+
+.prog-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+.prog-table th {
+  background: var(--off-black);
+  text-align: left;
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  padding: 0.75rem 1rem;
+  border-bottom: 0.5px solid var(--border);
+  white-space: nowrap;
+}
+
+.prog-table td {
+  padding: 0.65rem 1rem;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-bottom: 0.5px solid var(--border);
+}
+
+.prog-table tr:last-child td { border-bottom: none; }
+.prog-table td:first-child { font-family: 'DM Mono', monospace; color: var(--accent); }
+
+/* MONTH SWITCHER */
+.month-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.month-nav-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.month-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  background: var(--border);
+  border-radius: 1px;
+  outline: none;
+}
+
+.month-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(232,255,71,0.5);
+}
+
+.month-display {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  color: var(--accent);
+  min-width: 40px;
+  text-align: right;
+}
+
+.dynamic-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.dstat {
+  background: var(--card-bg);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.dstat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.dstat-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  font-family: 'DM Mono', monospace;
+  margin-top: 3px;
+}
+
+/* SUPP GRID */
+.supp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.supp-card {
+  background: var(--card-bg);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+}
+
+.supp-name {
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 3px;
+  font-size: 13px;
+}
+
+.supp-dose {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.supp-why {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* BOTTOM PADDING */
+.spacer { height: 3rem; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .header { padding: 0 1rem; }
+  .header-stat:not(:last-child) { display: none; }
+  .hero { padding: 90px 1rem 40px; }
+  .main { padding: 0 1rem 3rem; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">APEX</div>
+  <div class="header-right">
+    <div class="header-stat">
+      <span class="header-stat-label">Athlete</span>
+      <span class="header-stat-value">66 kg / 182 cm</span>
+    </div>
+    <div class="header-stat">
+      <span class="header-stat-label">Target</span>
+      <span class="header-stat-value">Ironman 70.3</span>
+    </div>
+    <div class="status-dot"></div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Complete training system — 12 month roadmap</div>
+  <h1 class="hero-title">Build<br><span>Muscle.</span><br>Race.</h1>
+  <p class="hero-subtitle">Vascular. Muscular. Race-ready.</p>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">6<span>×/wk</span></div>
+      <div class="hero-stat-label">Gym days</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">3<span>×/wk</span></div>
+      <div class="hero-stat-label">Run sessions</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">3<span>×/wk</span></div>
+      <div class="hero-stat-label">Cycle sessions</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">1<span>×/wk</span></div>
+      <div class="hero-stat-label">Swim session</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">175<span>g</span></div>
+      <div class="hero-stat-label">Daily protein</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">+3<span>kg</span></div>
+      <div class="hero-stat-label">Lean mass target</div>
+    </div>
+  </div>
+
+  <!-- NAV TABS -->
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPanel('week', this)">Weekly split</button>
+    <button class="nav-tab" onclick="showPanel('gym', this)">Gym workouts</button>
+    <button class="nav-tab" onclick="showPanel('diet', this)">Diet + supplements</button>
+    <button class="nav-tab" onclick="showPanel('prog', this)">Progression</button>
+    <button class="nav-tab" onclick="showPanel('race', this)">Race eligibility</button>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- WEEKLY SPLIT -->
+  <div class="panel active" id="panel-week">
+    <div class="section-label">Monday — gym + run</div>
+    <div class="day-card lift">
+      <div class="day-header">
+        <div class="day-name">Monday</div>
+        <div class="day-badges">
+          <span class="badge lift">Upper push + pull</span>
+          <span class="badge run">Zone 2 run</span>
+        </div>
+      </div>
+      <div class="day-desc">
+        <span class="hl">Morning gym:</span> Bench press, weighted pull-ups, OHP, cable row, cable crunch — 60 min<br>
+        <span class="hl">Evening run:</span> 6 km Zone 2 easy, nasal breathing, cadence 165–175 spm
+      </div>
+      <div class="day-note">// 2–3 hr gap between gym and run. Upper body lift = zero leg interference</div>
+      <div class="day-metrics">
+        <div>
+          <div class="day-metric-val" style="color:var(--lift)">60<span style="font-size:14px;color:var(--text-muted)"> min</span></div>
+          <div class="day-metric-label">Gym</div>
+        </div>
+        <div>
+          <div class="day-metric-val" style="color:var(--run)">6<span style="font-size:14px;color:var(--text-muted)"> km</span></div>
+          <div class="day-metric-label">Run</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Tuesday — gym + cycle</div>
+    <div class="day-card cycle">
+      <div class="day-header">
+        <div class="day-name">Tuesday</div>
+        <div class="day-badges">
+          <span class="badge lift">Lower body</span>
+          <span class="badge cycle">Easy cycle</span>
+        </div>
+      </div>
+      <div class="day-desc">
+        <span class="hl">Morning gym:</span> Back squat, RDL, Bulgarian split squat, leg press, calf raise — 65 min<br>
+        <span class="hl">Evening cycle:</span> 25 km Zone 2 easy spin, cadence 85–90 rpm, flat road
+      </div>
+      <div class="day-note">// Cycling after legs = concentric dominant, different fatigue pathway. Keep it easy.</div>
+      <div class="day-metrics">
+        <div>
+          <div class="day-metric-val" style="color:var(--lift)">65<span style="font-size:14px;color:var(--text-muted)"> min</span></div>
+          <div class="day-metric-label">Gym</div>
+        </div>
+        <div>
+          <div class="day-metric-val" style="color:var(--cycle)">25<span style="font-size:14px;color:var(--text-muted)"> km</span></div>
+          <div class="day-metric-label">Cycle</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Wednesday — gym + run</div>
+    <div class="day-card arms">
+      <div class="day-header">
+        <div class="day-name">Wednesday</div>
+        <div class="day-badges">
+          <span class="badge arms">Arms + core</span>
+          <span class="badge run">Tempo run</span>
+        </div>
+      </div>
+      <div class="day-desc">
+        <span class="hl">Morning gym:</span> Incline curl, skull crusher, hammer curl, pushdown, hanging leg raise, ab wheel, plank — 55 min<br>
+        <span class="hl">Evening run:</span> 5 km tempo — 1 km WU → 3 km threshold → 1 km CD
+      </div>
+      <div class="day-note">// Arms + core = zero leg fatigue. Tempo run on Wed builds your 70.3 half-marathon speed.</div>
+      <div class="day-metrics">
+        <div>
+          <div class="day-metric-val" style="color:var(--accent)">55<span style="font-size:14px;color:var(--text-muted)"> min</span></div>
+          <div class="day-metric-label">Gym</div>
+        </div>
+        <div>
+          <div class="day-metric-val" style="color:var(--run)">5<span style="font-size:14px;color:var(--text-muted)"> km</span></div>
+          <div class="day-metric-label">Tempo</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Thursday — gym + cycle</div>
+    <div class="day-card cycle">
+      <div class="day-header">
+        <div class="day-name">Thursday</div>
+        <div class="day-badges">
+          <span class="badge lift">Chest + back</span>
+          <span class="badge cycle">Interval cycle</span>
+        </div>
+      </div>
+      <div class="day-desc">
+        <span class="hl">Morning gym:</span> Incline bench, barbell row, weighted dips, face pull, lat pulldown, shrug — 60 min<br>
+        <span class="hl">Evening cycle:</span> 20 km with 4×3 min hard intervals, 3 min easy between
+      </div>
+      <div class="day-note">// Interval cycling builds the power output you need for brick day Saturday.</div>
+      <div class="day-metrics">
+        <div>
+          <div class="day-metric-val" style="color:var(--lift)">60<span style="font-size:14px;color:var(--text-muted)"> min</span></div>
+          <div class="day-metric-label">Gym</div>
+        </div>
+        <div>
+          <div class="day-metric-val" style="color:var(--cycle)">20<span style="font-size:14px;color:var(--text-muted)"> km</span></div>
+          <div class="day-metric-label">Intervals</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label">Friday — light gym only (mandatory)</div>
+    <div class="day-card rest">
+      <div class="day-header">
+        <div class="day-name">Friday</div>
+        <div class="day-badges">
+          <span class="badge rest">Shoulders</span>
+          <span class="badge rest">Mobility</span>
+        </div>
+      </div>
+      <div class="day-desc">
+        Lateral raise 4×15, face pull 3×20, rear delt fly 3×15, farmer carry 3×30m<br>
+        <span class="hl">Then:</span> 10 min mobility — hip flexors, thoracic spine, ankle, hamstring<br>
+        <strong style="color:var(--brick)">No cardio. No legs. Under 40 min total. This is non-negotiable.</strong>
+      </div>
+      <div class="day-note">// Friday light = Saturday brick is 20% better. Skip this rule and your brick suffers.</div>
+    </div>
+
+    <div class="section-label">Saturday — brick morning + swim evening</div>
+    <div class="day-card brick">
+      <div class="day-header">
+        <div class="day-name">Saturday</div>
+        <div class="day-badges">
+          <span class="badge cycle">Cycle</span>
+          <span class="badge run">Run</span>
+          <span class="badge brick">Brick</span>
+        </div>
+      </div>
+      <div class="day-desc">
+        <span class="hl">Morning brick:</span> Long ride → immediate run, no sitting at transition<br>
+        M1: 30 km cycle → 3 km run &nbsp;|&nbsp; M3: 60 km → 7 km &nbsp;|&nbsp; M6: 90 km → 15 km<br>
+        Eat 30–40g carbs/hr on bike. Finish by 10–11 AM. Rest + eat all afternoon.
+      </div>
+      <div class="day-note">// Min 4–5 hr gap before evening swim. Non-negotiable recovery window.</div>
+    </div>
+    <div class="day-card swim" style="margin-top:8px">
+      <div class="day-header">
+        <div class="day-name" style="font-size:20px">Sat evening</div>
+        <div class="day-badges">
+          <span class="badge swim">Swim only</span>
+        </div>
+      </div>
+      <div class="day-desc">
+        M1: <span class="hl">800m</span> drills + 4×100m sets &nbsp;|&nbsp; M3: 1800m &nbsp;|&nbsp; M6: 2500m+ &nbsp;|&nbsp; M10+: 3800m<br>
+        Focus: catch phase, hip rotation, bilateral breathing
+      </div>
+      <div class="day-note">// Swimming after brick flushes leg fatigue. Upper body dominant — no conflict.</div>
+    </div>
+
+    <div class="section-label">Sunday — complete rest</div>
+    <div class="day-card rest">
+      <div class="day-header">
+        <div class="day-name">Sunday</div>
+        <div class="day-badges">
+          <span class="badge rest">Full rest</span>
+        </div>
+      </div>
+      <div class="day-desc">
+        Walk 10 min max, foam roll, mobility, 8–9 hrs sleep. Eat at maintenance.<br>
+        <span class="hl">Muscle is built during rest.</span> This day is doing more work than you think.
+      </div>
+    </div>
+  </div>
+
+  <!-- GYM WORKOUTS -->
+  <div class="panel" id="panel-gym">
+    <div class="section-label">Monday — upper push + pull (hypertrophy)</div>
+    <div class="day-card lift" style="padding:0; overflow:hidden">
+      <table class="gym-table">
+        <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Goal</th></tr></thead>
+        <tbody>
+          <tr><td>Bench press</td><td>4 × 8–10</td><td>Chest thickness + push strength</td></tr>
+          <tr><td>Weighted pull-up</td><td>4 × 6–8</td><td>Back width, lat sweep, swim pull</td></tr>
+          <tr><td>Seated OHP</td><td>3 × 10</td><td>Shoulder size + overhead strength</td></tr>
+          <tr><td>Cable row</td><td>3 × 12</td><td>Mid-back thickness, posture on bike</td></tr>
+          <tr><td>Incline cable fly</td><td>3 × 15</td><td>Upper chest detail, vascularity</td></tr>
+          <tr><td>Cable crunch</td><td>3 × 15</td><td>Weighted abs — visible six pack</td></tr>
+          <tr><td>L-sit hold</td><td>3 × 20–30s</td><td>Core compression for swim</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-label">Tuesday — lower body squat + hinge</div>
+    <div class="day-card cycle" style="padding:0; overflow:hidden">
+      <table class="gym-table">
+        <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Goal</th></tr></thead>
+        <tbody>
+          <tr><td>Back squat</td><td>4 × 6</td><td>Quad mass + run/cycle power</td></tr>
+          <tr><td>Romanian deadlift</td><td>4 × 8</td><td>Hamstring + glute = run engine</td></tr>
+          <tr><td>Bulgarian split squat</td><td>3 × 10/leg</td><td>Single-leg stability for run</td></tr>
+          <tr><td>Leg press</td><td>3 × 15</td><td>Volume finisher, quad sweep</td></tr>
+          <tr><td>Seated calf raise</td><td>4 × 20</td><td>Calf size + run push-off</td></tr>
+          <tr><td>Copenhagen plank</td><td>3 × 20s</td><td>Hip adductor, knee stability</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-label">Wednesday — arms + core (vascularity day)</div>
+    <div class="day-card arms" style="padding:0; overflow:hidden">
+      <table class="gym-table">
+        <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Goal</th></tr></thead>
+        <tbody>
+          <tr><td>Incline dumbbell curl</td><td>4 × 10</td><td>Bicep peak, long head stretch</td></tr>
+          <tr><td>Overhead tricep extension</td><td>3 × 12</td><td>Tricep long head mass</td></tr>
+          <tr><td>Hammer curl</td><td>3 × 12</td><td>Brachialis = arm thickness</td></tr>
+          <tr><td>Cable pushdown</td><td>3 × 15</td><td>Tricep detail + vein pop</td></tr>
+          <tr><td>Reverse curl</td><td>3 × 12</td><td>Forearm vascularity</td></tr>
+          <tr><td>Hanging leg raise</td><td>4 × 15</td><td>Lower abs, hip flexor strength</td></tr>
+          <tr><td>Ab wheel rollout</td><td>3 × 10</td><td>Full core tension</td></tr>
+          <tr><td>Plank shoulder tap</td><td>3 × 20 taps</td><td>Anti-rotation, swim stability</td></tr>
+          <tr><td>Dragon flag (negative)</td><td>3 × 5</td><td>Elite core strength</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-label">Thursday — chest + back thickness</div>
+    <div class="day-card lift" style="padding:0; overflow:hidden">
+      <table class="gym-table">
+        <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Goal</th></tr></thead>
+        <tbody>
+          <tr><td>Incline barbell bench</td><td>4 × 8</td><td>Upper chest fullness</td></tr>
+          <tr><td>Barbell row</td><td>4 × 8</td><td>Back thickness, rowing power</td></tr>
+          <tr><td>Weighted dips</td><td>3 × 10</td><td>Lower chest + tricep tie-in</td></tr>
+          <tr><td>Lat pulldown</td><td>3 × 12</td><td>Lat width, V-taper</td></tr>
+          <tr><td>Face pull</td><td>3 × 20</td><td>Rear delt health, posture</td></tr>
+          <tr><td>Trap bar shrug</td><td>3 × 15</td><td>Trap size, thick upper back</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-label">Friday — shoulders + mobility (light — under 40 min)</div>
+    <div class="day-card rest" style="padding:0; overflow:hidden">
+      <table class="gym-table">
+        <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Goal</th></tr></thead>
+        <tbody>
+          <tr><td>Lateral raise</td><td>4 × 15</td><td>Shoulder width, capped delts</td></tr>
+          <tr><td>Rear delt fly</td><td>3 × 15</td><td>Posterior chain aesthetics</td></tr>
+          <tr><td>Face pull</td><td>3 × 20</td><td>Rotator cuff health for swim</td></tr>
+          <tr><td>Farmer carry</td><td>3 × 30m</td><td>Traps, grip, core stability</td></tr>
+          <tr><td>Hip flexor + thoracic stretch</td><td>10 min</td><td>Mobility for brick day</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-label">Progression protocol</div>
+    <div class="day-card lift">
+      <div class="day-desc">
+        <span class="hl">Double progression rule:</span> Hit top rep in all sets for 2 consecutive sessions → add 2.5 kg next session.<br><br>
+        <span class="hl">Example:</span> Bench 4×10 completed twice → bump to 4×8 at +2.5 kg. Ride that weight until 4×10 again.<br><br>
+        <span class="hl">Deload week every 4th week:</span> Cut volume 40%, keep same weights. Non-negotiable — this is where gains are locked in.<br><br>
+        <span class="hl">Vascularity tip:</span> On arm/shoulder days keep rest under 60s and finish with 2 sets of 20-rep pump work on arms.
+      </div>
+    </div>
+  </div>
+
+  <!-- DIET -->
+  <div class="panel" id="panel-diet">
+    <div class="section-label">Daily macros — heavy training days (Mon–Thu + Sat)</div>
+    <div class="macro-grid">
+      <div class="macro-card">
+        <div class="macro-num" style="color:var(--brick)">3200<span class="macro-unit">kcal</span></div>
+        <div class="macro-label">Total calories</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color:var(--lift)">180<span class="macro-unit">g</span></div>
+        <div class="macro-label">Protein</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color:var(--cycle)">440<span class="macro-unit">g</span></div>
+        <div class="macro-label">Carbs</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color:var(--swim)">85<span class="macro-unit">g</span></div>
+        <div class="macro-label">Fats</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color:var(--run)">5.5<span class="macro-unit">L</span></div>
+        <div class="macro-label">Water</div>
+      </div>
+    </div>
+
+    <div class="section-label">Meal timing — dual session days</div>
+<div class="day-card lift" style="padding:0; overflow:hidden">
+  <table class="gym-table">
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>What to eat</th>
+        <th>Macros</th>
+        <th>Running Total (P / C)</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td>Wake (Pre-Gym)</td>
+        <td>Banana + 1 boiled potato + electrolytes</td>
+        <td>3g P · 50g C</td>
+        <td>3 / 50</td>
+      </tr>
+
+      <tr>
+        <td>Post-Gym</td>
+        <td>1 scoop whey + banana</td>
+        <td>25g P · 30g C</td>
+        <td>28 / 80</td>
+      </tr>
+
+      <tr>
+        <td>Breakfast</td>
+        <td>4 eggs + 60g chana + 1 potato</td>
+        <td>40g P · 50g C</td>
+        <td>68 / 130</td>
+      </tr>
+
+      <tr>
+        <td>Lunch</td>
+        <td>2 cups rice + dal + 50g soyabean + curd</td>
+        <td>50g P · 110g C</td>
+        <td>118 / 240</td>
+      </tr>
+
+      <tr>
+        <td>Pre-Run</td>
+        <td>2 bread + banana + honey + electrolytes</td>
+        <td>5g P · 80g C</td>
+        <td>123 / 320</td>
+      </tr>
+
+      <tr>
+        <td>During Run</td>
+        <td>1 banana + 2–3 dates + electrolytes</td>
+        <td>2g P · 45g C</td>
+        <td>125 / 365</td>
+      </tr>
+
+      <tr>
+        <td>Post-Run</td>
+        <td>Rice + dal + 30g soyabean</td>
+        <td>30g P · 80g C</td>
+        <td>155 / 445</td>
+      </tr>
+
+      <tr>
+        <td>Dinner</td>
+        <td>3 chapati + sabzi + curd + 60g chana</td>
+        <td>35g P · 90g C</td>
+        <td>190 / 535</td>
+      </tr>
+
+      <tr>
+        <td>Before Bed</td>
+        <td>300 ml milk</td>
+        <td>10g P · 15g C</td>
+        <td>200 / 550</td>
+      </tr>
+
+
+    </tbody>
+  </table>
+</div>
+
+    <div class="section-label">Saturday — brick + swim day (peak demand)</div>
+    <div class="macro-grid">
+      <div class="macro-card">
+        <div class="macro-num" style="color:var(--brick)">3500<span class="macro-unit">kcal</span></div>
+        <div class="macro-label">Saturday calories</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color:var(--cycle)">510<span class="macro-unit">g</span></div>
+        <div class="macro-label">Carbs</div>
+      </div>
+      <div class="macro-card">
+        <div class="macro-num" style="color:var(--lift)">40<span class="macro-unit">g/hr</span></div>
+        <div class="macro-label">During brick</div>
+      </div>
+    </div>
+
+    <div class="section-label">Supplements — the non-negotiable stack</div>
+    <div class="supp-grid">
+      <div class="supp-card">
+        <div class="supp-name">Creatine monohydrate</div>
+        <div class="supp-dose">5g every day</div>
+        <div class="supp-why">Strength, muscle volume, power output. Non-negotiable.</div>
+      </div>
+      <div class="supp-card">
+        <div class="supp-name">Whey protein</div>
+        <div class="supp-dose">1–2 scoops/day</div>
+        <div class="supp-why">Hit protein target conveniently post-workout.</div>
+      </div>
+      <div class="supp-card">
+        <div class="supp-name">Electrolytes</div>
+        <div class="supp-dose">During sessions 60+ min</div>
+        <div class="supp-why">Na + K + Mg. Prevents cramping, sustains power.</div>
+      </div>
+      <div class="supp-card">
+        <div class="supp-name">Vitamin D3 + K2</div>
+        <div class="supp-dose">2000–4000 IU D3 daily</div>
+        <div class="supp-why">Testosterone, bone density, immune function.</div>
+      </div>
+      <div class="supp-card">
+        <div class="supp-name">Omega-3</div>
+        <div class="supp-dose">2–3g EPA/DHA daily</div>
+        <div class="supp-why">Joint health, inflammation, vascularity support.</div>
+      </div>
+      <div class="supp-card">
+        <div class="supp-name">Magnesium glycinate</div>
+        <div class="supp-dose">300–400mg before bed</div>
+        <div class="supp-why">Sleep quality, muscle recovery, cramp prevention.</div>
+      </div>
+    </div>
+
+    <div class="section-label">Phase-wise calorie strategy</div>
+    <div class="day-card lift" style="padding:0; overflow:hidden">
+      <table class="gym-table">
+        <thead><tr><th>Phase</th><th>Duration</th><th>Calories</th><th>Goal</th></tr></thead>
+        <tbody>
+          <tr><td>Lean bulk</td><td>Months 1–4</td><td>+300–400 surplus</td><td>Gain 3–4 kg lean mass</td></tr>
+          <tr><td>Maintenance recomp</td><td>Months 5–8</td><td>Maintenance</td><td>Hold muscle, drop fat as cardio rises</td></tr>
+          <tr><td>Race prep</td><td>Months 9–12</td><td>Slight −200 deficit</td><td>Race weight, stay powerful</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PROGRESSION -->
+  <div class="panel" id="panel-prog">
+    <div class="section-label">Interactive progression — drag to see targets by month</div>
+    <div class="month-nav">
+      <span class="month-nav-label">Month</span>
+      <input type="range" min="1" max="12" value="1" class="month-slider" id="monthSlider">
+      <span class="month-display" id="monthDisplay">1</span>
+    </div>
+
+    <div class="dynamic-stats">
+      <div class="dstat">
+        <div class="dstat-num" id="d-run" style="color:var(--run)">6 km</div>
+        <div class="dstat-label">Run / session</div>
+      </div>
+      <div class="dstat">
+        <div class="dstat-num" id="d-cycle" style="color:var(--cycle)">25 km</div>
+        <div class="dstat-label">Cycle / session</div>
+      </div>
+      <div class="dstat">
+        <div class="dstat-num" id="d-swim" style="color:var(--swim)">800m</div>
+        <div class="dstat-label">Swim / session</div>
+      </div>
+      <div class="dstat">
+        <div class="dstat-num" id="d-brick" style="color:var(--brick)">30+3</div>
+        <div class="dstat-label">Brick (km+km)</div>
+      </div>
+      <div class="dstat">
+        <div class="dstat-num" id="d-bw" style="color:var(--lift)">66 kg</div>
+        <div class="dstat-label">Target bodyweight</div>
+      </div>
+    </div>
+
+    <div class="section-label">Strength progression targets</div>
+    <div class="day-card lift">
+      <div id="strength-bars"></div>
+    </div>
+
+    <div class="section-label">Full monthly progression table</div>
+    <div class="prog-table-wrap">
+      <table class="prog-table">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Run (session)</th>
+            <th>Cycle (session)</th>
+            <th>Swim (session)</th>
+            <th>Brick</th>
+            <th>Body weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>M1</td><td>6 km</td><td>25 km</td><td>800m</td><td>30+3 km</td><td>66–67 kg</td></tr>
+          <tr><td>M2</td><td>8 km</td><td>35 km</td><td>1200m</td><td>40+5 km</td><td>67–68 kg</td></tr>
+          <tr><td>M3</td><td>10 km</td><td>50 km</td><td>1800m</td><td>55+7 km</td><td>68 kg</td></tr>
+          <tr><td>M4</td><td>13 km</td><td>65 km</td><td>2200m</td><td>70+10 km</td><td>68–69 kg</td></tr>
+          <tr><td>M5</td><td>16 km</td><td>80 km</td><td>2600m</td><td>80+14 km</td><td>69–70 kg</td></tr>
+          <tr><td>M6</td><td>18 km</td><td>90 km</td><td>3000m</td><td>90+18 km</td><td>70 kg</td></tr>
+          <tr><td>M8</td><td>21 km</td><td>100 km</td><td>3500m</td><td>90+21 km</td><td>70–71 kg</td></tr>
+          <tr><td>M10</td><td>25 km</td><td>120 km</td><td>3800m</td><td>Full 70.3 sim</td><td>70–72 kg</td></tr>
+          <tr><td>M12</td><td>30 km</td><td>140 km</td><td>4200m</td><td>Race ready</td><td>70–72 kg</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-label">Body composition trajectory</div>
+    <div class="day-card lift" style="padding:0; overflow:hidden">
+      <table class="gym-table">
+        <thead><tr><th>Milestone</th><th>Body weight</th><th>Est. body fat</th><th>How you look</th></tr></thead>
+        <tbody>
+          <tr><td>Start</td><td>66 kg</td><td>~12–13%</td><td>Lean but not yet muscular</td></tr>
+          <tr><td>Month 4</td><td>69–70 kg</td><td>~12%</td><td>Noticeably more muscular, veins appearing</td></tr>
+          <tr><td>Month 8</td><td>70–71 kg</td><td>~10–11%</td><td>Vascular, thick, athletic build</td></tr>
+          <tr><td>Month 12</td><td>70–72 kg</td><td>~9–10%</td><td>Full vascular + muscular aesthetic physique</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- RACE ELIGIBILITY -->
+  <div class="panel" id="panel-race">
+    <div class="section-label">Race readiness roadmap</div>
+    <div class="timeline">
+      <div class="timeline-item unlocked">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-title">Hyrox</div>
+            <div class="timeline-sub">8 km run + 8 functional stations (ski erg, sled, burpee broad jump, rowing...)</div>
+          </div>
+          <span class="unlock-badge green">Month 3–4</span>
+        </div>
+        <div style="margin-bottom:0.75rem">
+          <div class="prog-row"><span class="prog-label">Run base</span><div class="prog-track"><div class="prog-fill" style="width:45%;background:var(--run)"></div></div><span class="prog-val">Need 10 km</span></div>
+          <div class="prog-row"><span class="prog-label">Strength</span><div class="prog-track"><div class="prog-fill" style="width:55%;background:var(--lift)"></div></div><span class="prog-val">Moderate</span></div>
+          <div class="prog-row"><span class="prog-label">Conditioning</span><div class="prog-track"><div class="prog-fill" style="width:40%;background:var(--cycle)"></div></div><span class="prog-val">3 months</span></div>
+        </div>
+        <div class="timeline-body">By month 3 your run base hits 10 km, strength is solid, and dual-session conditioning handles the stations easily. Race Hyrox Open category. Sub-1:30 finish realistic by month 6.</div>
+      </div>
+
+      <div class="timeline-item soon">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-title">Ironman 70.3</div>
+            <div class="timeline-sub">1.9 km swim + 90 km cycle + 21.1 km run</div>
+          </div>
+          <span class="unlock-badge amber">Month 10–12</span>
+        </div>
+        <div style="margin-bottom:0.75rem">
+          <div class="prog-row"><span class="prog-label">Swim</span><div class="prog-track"><div class="prog-fill" style="width:70%;background:var(--swim)"></div></div><span class="prog-val">Need 1.9 km</span></div>
+          <div class="prog-row"><span class="prog-label">Cycle</span><div class="prog-track"><div class="prog-fill" style="width:75%;background:var(--cycle)"></div></div><span class="prog-val">Need 90 km</span></div>
+          <div class="prog-row"><span class="prog-label">Run</span><div class="prog-track"><div class="prog-fill" style="width:80%;background:var(--run)"></div></div><span class="prog-val">Need 21 km</span></div>
+          <div class="prog-row"><span class="prog-label">Brick base</span><div class="prog-track"><div class="prog-fill" style="width:85%;background:var(--brick)"></div></div><span class="prog-val">6+ months</span></div>
+        </div>
+        <div class="timeline-body">By month 10 swim hits 3800m+ (comfortable over 1.9 km race distance), brick at 90+21, aerobic base deep enough. Finish time target: 5:30–6:30 hr. Your gym base means your run off the bike will be stronger than most pure triathletes.</div>
+      </div>
+
+      <div class="timeline-item future">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-title">Ironman Full 140.6</div>
+            <div class="timeline-sub">3.8 km swim + 180 km cycle + 42.2 km run</div>
+          </div>
+          <span class="unlock-badge red">Month 18–24</span>
+        </div>
+        <div style="margin-bottom:0.75rem">
+          <div class="prog-row"><span class="prog-label">Swim</span><div class="prog-track"><div class="prog-fill" style="width:35%;background:var(--swim)"></div></div><span class="prog-val">Need 4 km+</span></div>
+          <div class="prog-row"><span class="prog-label">Cycle</span><div class="prog-track"><div class="prog-fill" style="width:30%;background:var(--cycle)"></div></div><span class="prog-val">Need 180 km</span></div>
+          <div class="prog-row"><span class="prog-label">Run</span><div class="prog-track"><div class="prog-fill" style="width:25%;background:var(--run)"></div></div><span class="prog-val">Need 42 km</span></div>
+          <div class="prog-row"><span class="prog-label">Total base</span><div class="prog-track"><div class="prog-fill" style="width:20%;background:var(--brick)"></div></div><span class="prog-val">18 months</span></div>
+        </div>
+        <div class="timeline-body">Complete at least one 70.3 first. Your body needs 6+ months of high-volume training post-half before full distance is safe. Target: Year 2. Finish target first attempt: 11–13 hr. Your muscular base will carry you through the marathon at the end when pure triathletes are falling apart.</div>
+      </div>
+    </div>
+
+    <div class="section-label">Full timeline summary</div>
+    <div class="prog-table-wrap">
+      <table class="prog-table">
+        <thead><tr><th>Month</th><th>Key milestone</th><th>Race eligible</th></tr></thead>
+        <tbody>
+          <tr><td>M1–2</td><td>Base building, technique, all lifts progressing</td><td>—</td></tr>
+          <tr><td>M3–4</td><td>10 km run, 50 km cycle, 1800m swim</td><td>Hyrox Open</td></tr>
+          <tr><td>M5–6</td><td>Half marathon base, 90 km cycle, veins visible</td><td>Hyrox Pro target</td></tr>
+          <tr><td>M8–9</td><td>Full 70.3 training distances, 70 kg muscular body</td><td>70.3 prep race</td></tr>
+          <tr><td>M10–12</td><td>Race-ready Ironman 70.3, peak physique</td><td>Ironman 70.3</td></tr>
+          <tr><td>M18–24</td><td>Full Ironman base built post-70.3</td><td>Ironman 140.6</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+</main>
+
+<script>
+function showPanel(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  el.classList.add('active');
+}
+
+const monthData = [
+  null,
+  { run:'6 km', cycle:'25 km', swim:'800m', brick:'30+3', bw:'66–67 kg', sq:66, bp:62, pu:'BW', dl:70, ohp:40 },
+  { run:'8 km', cycle:'35 km', swim:'1200m', brick:'40+5', bw:'67–68 kg', sq:72, bp:67, pu:'BW+5', dl:78, ohp:43 },
+  { run:'10 km', cycle:'50 km', swim:'1800m', brick:'55+7', bw:'68 kg', sq:78, bp:72, pu:'BW+8', dl:84, ohp:46 },
+  { run:'13 km', cycle:'65 km', swim:'2200m', brick:'70+10', bw:'68–69 kg', sq:84, bp:77, pu:'BW+12', dl:90, ohp:50 },
+  { run:'16 km', cycle:'80 km', swim:'2600m', brick:'80+14', bw:'69–70 kg', sq:88, bp:81, pu:'BW+15', dl:96, ohp:53 },
+  { run:'18 km', cycle:'90 km', swim:'3000m', brick:'90+18', bw:'70 kg', sq:92, bp:84, pu:'BW+18', dl:102, ohp:56 },
+  { run:'19 km', cycle:'95 km', swim:'3200m', brick:'90+20', bw:'70 kg', sq:95, bp:87, pu:'BW+20', dl:106, ohp:58 },
+  { run:'21 km', cycle:'100 km', swim:'3500m', brick:'90+21', bw:'70–71 kg', sq:98, bp:90, pu:'BW+22', dl:110, ohp:60 },
+  { run:'23 km', cycle:'110 km', swim:'3650m', brick:'90+21', bw:'71 kg', sq:101, bp:93, pu:'BW+24', dl:112, ohp:62 },
+  { run:'25 km', cycle:'120 km', swim:'3800m', brick:'90+21', bw:'71 kg', sq:104, bp:96, pu:'BW+25', dl:114, ohp:64 },
+  { run:'27 km', cycle:'130 km', swim:'4000m', brick:'90+21', bw:'71–72 kg', sq:107, bp:98, pu:'BW+26', dl:116, ohp:66 },
+  { run:'30 km', cycle:'140 km', swim:'4200m', brick:'Race ready', bw:'70–72 kg', sq:110, bp:100, pu:'BW+27', dl:118, ohp:68 },
+];
+
+function updateSlider(val) {
+  const d = monthData[val];
+  document.getElementById('monthDisplay').textContent = val;
+  document.getElementById('d-run').textContent = d.run;
+  document.getElementById('d-cycle').textContent = d.cycle;
+  document.getElementById('d-swim').textContent = d.swim;
+  document.getElementById('d-brick').textContent = d.brick;
+  document.getElementById('d-bw').textContent = d.bw;
+
+  const maxVals = { sq: 110, bp: 100, dl: 118, ohp: 68 };
+  document.getElementById('strength-bars').innerHTML = `
+    <div class="prog-row"><span class="prog-label">Squat</span><div class="prog-track"><div class="prog-fill" style="width:${Math.round(d.sq/maxVals.sq*100)}%;background:var(--lift)"></div></div><span class="prog-val">${d.sq} kg</span></div>
+    <div class="prog-row"><span class="prog-label">Bench</span><div class="prog-track"><div class="prog-fill" style="width:${Math.round(d.bp/maxVals.bp*100)}%;background:var(--run)"></div></div><span class="prog-val">${d.bp} kg</span></div>
+    <div class="prog-row"><span class="prog-label">RDL</span><div class="prog-track"><div class="prog-fill" style="width:${Math.round(d.dl/maxVals.dl*100)}%;background:var(--cycle)"></div></div><span class="prog-val">${d.dl} kg</span></div>
+    <div class="prog-row"><span class="prog-label">OHP</span><div class="prog-track"><div class="prog-fill" style="width:${Math.round(d.ohp/maxVals.ohp*100)}%;background:var(--swim)"></div></div><span class="prog-val">${d.ohp} kg</span></div>
+    <div class="prog-row"><span class="prog-label">Pull-up</span><div class="prog-track"><div class="prog-fill" style="width:${Math.round((val/12)*100)}%;background:var(--accent)"></div></div><span class="prog-val">${d.pu}</span></div>
+  `;
+}
+
+document.getElementById('monthSlider').addEventListener('input', function() {
+  updateSlider(parseInt(this.value));
+});
+
+updateSlider(1);
+
+document.querySelectorAll('.day-card').forEach(card => {
+  card.addEventListener('mouseenter', function() {
+    this.style.transform = 'translateX(3px)';
+    this.style.transition = 'transform 0.2s ease';
+  });
+  card.addEventListener('mouseleave', function() {
+    this.style.transform = 'translateX(0)';
+  });
+});
+</script>
+</body>
+</html>
