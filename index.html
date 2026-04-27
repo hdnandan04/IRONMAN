@@ -37,7 +37,7 @@ body {
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 ::-webkit-scrollbar { width: 3px; }
@@ -631,7 +631,14 @@ body {
 .save-toast.show { transform: translateX(-50%) translateY(0); }
 
 /* GYM TABLE */
-.gym-table { width: 100%; border-collapse: collapse; }
+  .table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gym-table {
+  min-width: 650px; /* 🔥 forces scroll */
+}
 .gym-table th { text-align: left; font-size: 9px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); padding: 0.5rem 0.75rem; border-bottom: 0.5px solid var(--border); }
 .gym-table td { padding: 0.6rem 0.75rem; font-size: 13px; color: var(--text-muted); border-bottom: 0.5px solid var(--border); vertical-align: top; }
 .gym-table tr:last-child td { border-bottom: none; }
@@ -1138,8 +1145,9 @@ body {
     </div>
 
     <div class="section-label">Phase-wise calorie strategy</div>
-    <div class="day-card lift" style="padding:0; overflow:hidden">
-      <table class="gym-table">
+    <div class="day-card lift" style="padding:0;">
+  <div class="table-scroll">
+    <table class="gym-table">
         <thead><tr><th>Phase</th><th>Duration</th><th>Calories</th><th>Goal</th></tr></thead>
         <tbody>
           <tr><td>Lean bulk</td><td>Months 1–4</td><td>+300–400 surplus</td><td>Gain 3–4 kg lean mass</td></tr>
