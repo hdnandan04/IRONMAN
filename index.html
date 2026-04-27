@@ -23,10 +23,12 @@
   --lift: #c084fc;
   --brick: #f87171;
   --rest: #6b7280;
+  --study: #f59e0b;
+  --content: #ec4899;
+  --tech: #06b6d4;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -38,12 +40,10 @@ body {
   overflow-x: hidden;
 }
 
-/* SCROLLBAR */
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--off-black); }
 ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 2px; }
 
-/* HEADER */
 .header {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -71,26 +71,9 @@ body {
   gap: 1.5rem;
 }
 
-.header-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.header-stat-label {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-dim);
-  font-family: 'DM Mono', monospace;
-}
-
-.header-stat-value {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  font-family: 'DM Mono', monospace;
-}
+.header-stat { display: flex; flex-direction: column; align-items: flex-end; }
+.header-stat-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); font-family: 'DM Mono', monospace; }
+.header-stat-value { font-size: 13px; font-weight: 500; color: var(--text); font-family: 'DM Mono', monospace; }
 
 .status-dot {
   width: 7px; height: 7px;
@@ -100,17 +83,12 @@ body {
   animation: pulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-/* HERO */
 .hero {
   padding: 120px 2rem 60px;
   max-width: 1100px;
   margin: 0 auto;
-  position: relative;
 }
 
 .hero-eyebrow {
@@ -128,8 +106,7 @@ body {
 .hero-eyebrow::before {
   content: '';
   display: inline-block;
-  width: 24px;
-  height: 1px;
+  width: 24px; height: 1px;
   background: var(--accent);
 }
 
@@ -142,9 +119,7 @@ body {
   margin-bottom: 0.25rem;
 }
 
-.hero-title span {
-  color: var(--accent);
-}
+.hero-title span { color: var(--accent); }
 
 .hero-subtitle {
   font-family: 'Instrument Serif', serif;
@@ -166,35 +141,11 @@ body {
   margin-bottom: 3rem;
 }
 
-.hero-stat {
-  background: var(--off-black);
-  padding: 1.25rem 1.5rem;
-  position: relative;
-}
+.hero-stat { background: var(--off-black); padding: 1.25rem 1.5rem; }
+.hero-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; line-height: 1; color: var(--text); letter-spacing: 0.02em; }
+.hero-stat-num span { font-size: 18px; color: var(--text-muted); }
+.hero-stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-top: 4px; font-family: 'DM Mono', monospace; }
 
-.hero-stat-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 36px;
-  line-height: 1;
-  color: var(--text);
-  letter-spacing: 0.02em;
-}
-
-.hero-stat-num span {
-  font-size: 18px;
-  color: var(--text-muted);
-}
-
-.hero-stat-label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-dim);
-  margin-top: 4px;
-  font-family: 'DM Mono', monospace;
-}
-
-/* NAV TABS */
 .nav-tabs {
   display: flex;
   gap: 0;
@@ -204,7 +155,6 @@ body {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
-
 .nav-tabs::-webkit-scrollbar { display: none; }
 
 .nav-tab {
@@ -222,29 +172,15 @@ body {
   transition: color 0.2s, border-color 0.2s;
   font-family: 'DM Mono', monospace;
 }
-
 .nav-tab:hover { color: var(--text-muted); }
-.nav-tab.active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-}
+.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-/* MAIN LAYOUT */
-.main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 2rem 4rem;
-}
-
+.main { max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; }
 .panel { display: none; animation: fadeIn 0.3s ease; }
 .panel.active { display: block; }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-/* SECTION LABEL */
 .section-label {
   font-family: 'DM Mono', monospace;
   font-size: 9px;
@@ -256,12 +192,7 @@ body {
   border-bottom: 0.5px solid var(--border);
 }
 
-/* DAY CARDS */
-.day-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
+.day-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
 
 .day-card {
   background: var(--card-bg);
@@ -270,18 +201,15 @@ body {
   padding: 1.25rem 1.5rem;
   position: relative;
   overflow: hidden;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, transform 0.2s;
 }
-
 .day-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0;
-  width: 3px;
-  height: 100%;
+  width: 3px; height: 100%;
   border-radius: 12px 0 0 12px;
 }
-
 .day-card.run::before { background: var(--run); }
 .day-card.cycle::before { background: var(--cycle); }
 .day-card.lift::before { background: var(--lift); }
@@ -289,8 +217,8 @@ body {
 .day-card.brick::before { background: var(--brick); }
 .day-card.rest::before { background: var(--rest); }
 .day-card.arms::before { background: var(--accent); }
-
-.day-card:hover { border-color: var(--border-light); }
+.day-card.study::before { background: var(--study); }
+.day-card:hover { border-color: var(--border-light); transform: translateX(3px); }
 
 .day-header {
   display: flex;
@@ -300,20 +228,8 @@ body {
   margin-bottom: 0.75rem;
 }
 
-.day-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  color: var(--text);
-}
-
-.day-badges {
-  display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
+.day-name { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 0.04em; line-height: 1; color: var(--text); }
+.day-badges { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
 
 .badge {
   font-size: 9px;
@@ -324,7 +240,6 @@ body {
   border-radius: 4px;
   border: 0.5px solid;
 }
-
 .badge.run { color: var(--run); border-color: var(--run); background: rgba(74,222,128,0.08); }
 .badge.cycle { color: var(--cycle); border-color: var(--cycle); background: rgba(251,146,60,0.08); }
 .badge.lift { color: var(--lift); border-color: var(--lift); background: rgba(192,132,252,0.08); }
@@ -332,25 +247,13 @@ body {
 .badge.brick { color: var(--brick); border-color: var(--brick); background: rgba(248,113,113,0.08); }
 .badge.rest { color: var(--rest); border-color: var(--rest); background: rgba(107,114,128,0.08); }
 .badge.arms { color: var(--accent); border-color: var(--accent); background: rgba(232,255,71,0.08); }
+.badge.study { color: var(--study); border-color: var(--study); background: rgba(245,158,11,0.08); }
+.badge.content { color: var(--content); border-color: var(--content); background: rgba(236,72,153,0.08); }
+.badge.tech { color: var(--tech); border-color: var(--tech); background: rgba(6,182,212,0.08); }
 
-.day-desc {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.7;
-}
-
-.day-desc .hl {
-  color: var(--text);
-  font-weight: 500;
-}
-
-.day-note {
-  font-size: 11px;
-  color: var(--text-dim);
-  margin-top: 0.5rem;
-  font-family: 'DM Mono', monospace;
-  font-style: italic;
-}
+.day-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+.day-desc .hl { color: var(--text); font-weight: 500; }
+.day-note { font-size: 11px; color: var(--text-dim); margin-top: 0.5rem; font-family: 'DM Mono', monospace; font-style: italic; }
 
 .day-metrics {
   display: flex;
@@ -359,382 +262,456 @@ body {
   padding-top: 0.75rem;
   border-top: 0.5px solid var(--border);
 }
+.day-metric-val { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.04em; line-height: 1; }
+.day-metric-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); font-family: 'DM Mono', monospace; }
 
-.day-metric-val {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  letter-spacing: 0.04em;
-  line-height: 1;
-}
-
-.day-metric-label {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-dim);
-  font-family: 'DM Mono', monospace;
-}
-
-/* GYM TABLE */
-.gym-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.gym-table th {
-  text-align: left;
-  font-size: 9px;
-  font-family: 'DM Mono', monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-dim);
-  padding: 0.5rem 0.75rem;
-  border-bottom: 0.5px solid var(--border);
-}
-
-.gym-table td {
-  padding: 0.6rem 0.75rem;
-  font-size: 13px;
-  color: var(--text-muted);
-  border-bottom: 0.5px solid var(--border);
-  vertical-align: top;
-}
-
-.gym-table tr:last-child td { border-bottom: none; }
-
-.gym-table td:first-child {
-  color: var(--text);
-  font-weight: 500;
-}
-
-.gym-table td:nth-child(2) {
-  font-family: 'DM Mono', monospace;
-  color: var(--accent);
-  white-space: nowrap;
-}
-
-/* PROGRESS BARS */
-.prog-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 6px 0;
-}
-
-.prog-label {
-  font-size: 11px;
-  font-family: 'DM Mono', monospace;
-  color: var(--text-muted);
-  width: 50px;
-  flex-shrink: 0;
-}
-
-.prog-track {
-  flex: 1;
-  height: 3px;
-  background: var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.prog-fill {
-  height: 100%;
-  border-radius: 2px;
-  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.prog-val {
-  font-size: 11px;
-  font-family: 'DM Mono', monospace;
-  color: var(--text-dim);
-  width: 65px;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-/* DIET CARDS */
-.macro-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 8px;
-  margin-bottom: 1rem;
-}
-
-.macro-card {
+/* ROUTINE TIMELINE */
+.routine-day {
   background: var(--card-bg);
   border: 0.5px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 10px;
 }
 
-.macro-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;
-  letter-spacing: 0.02em;
-  line-height: 1;
-}
-
-.macro-unit {
-  font-size: 14px;
-  color: var(--text-muted);
-}
-
-.macro-label {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-dim);
-  font-family: 'DM Mono', monospace;
-  margin-top: 4px;
-}
-
-/* TIMELINE */
-.timeline {
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 5px;
-  top: 8px;
-  bottom: 0;
-  width: 1px;
-  background: var(--border);
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
+.routine-day-header {
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
   border-bottom: 0.5px solid var(--border);
-}
-
-.timeline-item:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: -1.5rem;
-  top: 6px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 1.5px solid var(--border);
-  background: var(--off-black);
+  gap: 1rem;
   transition: background 0.2s;
 }
+.routine-day-header:hover { background: rgba(255,255,255,0.02); }
 
-.timeline-item.unlocked .timeline-dot { background: var(--run); border-color: var(--run); box-shadow: 0 0 8px rgba(74,222,128,0.4); }
-.timeline-item.soon .timeline-dot { background: var(--cycle); border-color: var(--cycle); box-shadow: 0 0 8px rgba(251,146,60,0.3); }
-.timeline-item.future .timeline-dot { background: var(--border); border-color: var(--border-light); }
+.routine-day-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
 
-.timeline-header {
+.routine-day-meta {
+  font-size: 10px;
+  color: var(--text-dim);
+  font-family: 'DM Mono', monospace;
+}
+
+.routine-chevron {
+  color: var(--text-dim);
+  font-size: 12px;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+
+.routine-body { display: none; }
+.routine-body.open { display: block; }
+
+.time-block {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  border-bottom: 0.5px solid var(--border);
+  position: relative;
+  transition: background 0.2s;
+}
+.time-block:last-child { border-bottom: none; }
+.time-block:hover { background: rgba(255,255,255,0.015); }
+
+/* EDIT MODE STYLES */
+.edit-mode .time-block {
+  cursor: pointer;
+}
+.edit-mode .time-block:hover {
+  background: rgba(232,255,71,0.04);
+  outline: 0.5px solid rgba(232,255,71,0.2);
+}
+.edit-mode .time-block .edit-hint {
+  display: flex;
+}
+
+.edit-hint {
+  display: none;
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 9px;
+  font-family: 'DM Mono', monospace;
+  color: var(--accent);
+  opacity: 0.5;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+}
+
+.time-slot {
+  padding: 0.85rem 1rem 0.85rem 1.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--text-dim);
+  border-right: 0.5px solid var(--border);
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
+  padding-top: 1rem;
+  line-height: 1.4;
+  white-space: pre-line;
 }
 
-.timeline-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 22px;
-  letter-spacing: 0.04em;
-  line-height: 1;
-}
-
-.timeline-sub {
-  font-size: 11px;
-  color: var(--text-dim);
-  font-family: 'DM Mono', monospace;
-  margin-bottom: 0.75rem;
-}
-
-.timeline-body {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.7;
-}
-
-.unlock-badge {
-  font-size: 10px;
-  font-family: 'DM Mono', monospace;
-  padding: 4px 10px;
-  border-radius: 4px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  border: 0.5px solid;
-}
-
-.unlock-badge.green { color: var(--run); border-color: var(--run); background: rgba(74,222,128,0.08); }
-.unlock-badge.amber { color: var(--cycle); border-color: var(--cycle); background: rgba(251,146,60,0.08); }
-.unlock-badge.red { color: var(--brick); border-color: var(--brick); background: rgba(248,113,113,0.08); }
-
-/* PROGRESSION TABLE */
-.prog-table-wrap {
-  overflow-x: auto;
-  border-radius: 10px;
-  border: 0.5px solid var(--border);
-}
-
-.prog-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 560px;
-}
-
-.prog-table th {
-  background: var(--off-black);
-  text-align: left;
-  font-size: 9px;
-  font-family: 'DM Mono', monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-dim);
-  padding: 0.75rem 1rem;
-  border-bottom: 0.5px solid var(--border);
-  white-space: nowrap;
-}
-
-.prog-table td {
-  padding: 0.65rem 1rem;
-  font-size: 12px;
-  color: var(--text-muted);
-  border-bottom: 0.5px solid var(--border);
-}
-
-.prog-table tr:last-child td { border-bottom: none; }
-.prog-table td:first-child { font-family: 'DM Mono', monospace; color: var(--accent); }
-
-/* MONTH SWITCHER */
-.month-nav {
+.time-content {
+  padding: 0.85rem 1.25rem;
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.month-nav-label {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-dim);
-}
-
-.month-slider {
-  flex: 1;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 2px;
-  background: var(--border);
-  border-radius: 1px;
-  outline: none;
-}
-
-.month-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--accent);
-  cursor: pointer;
-  box-shadow: 0 0 8px rgba(232,255,71,0.5);
-}
-
-.month-display {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
-  color: var(--accent);
-  min-width: 40px;
-  text-align: right;
-}
-
-.dynamic-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 8px;
-  margin-bottom: 1.5rem;
-}
-
-.dstat {
-  background: var(--card-bg);
-  border: 0.5px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-}
-
-.dstat-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  line-height: 1;
-  transition: all 0.3s ease;
-}
-
-.dstat-label {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-dim);
-  font-family: 'DM Mono', monospace;
-  margin-top: 3px;
-}
-
-/* SUPP GRID */
-.supp-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 8px;
-}
-
-.supp-card {
-  background: var(--card-bg);
-  border: 0.5px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-}
-
-.supp-name {
+.time-activity {
+  font-size: 13px;
   font-weight: 500;
   color: var(--text);
-  margin-bottom: 3px;
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.supp-dose {
-  font-family: 'DM Mono', monospace;
-  font-size: 10px;
-  color: var(--accent);
-  margin-bottom: 4px;
+.time-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
-.supp-why {
+.time-detail {
   font-size: 11px;
   color: var(--text-dim);
   line-height: 1.5;
 }
 
-/* BOTTOM PADDING */
+.time-tag {
+  display: inline-block;
+  font-size: 8px;
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 0.5px solid;
+  margin-left: 4px;
+}
+
+.tag-study { color: var(--study); border-color: var(--study); background: rgba(245,158,11,0.08); }
+.tag-gym { color: var(--lift); border-color: var(--lift); background: rgba(192,132,252,0.08); }
+.tag-run { color: var(--run); border-color: var(--run); background: rgba(74,222,128,0.08); }
+.tag-cycle { color: var(--cycle); border-color: var(--cycle); background: rgba(251,146,60,0.08); }
+.tag-swim { color: var(--swim); border-color: var(--swim); background: rgba(56,189,248,0.08); }
+.tag-content { color: var(--content); border-color: var(--content); background: rgba(236,72,153,0.08); }
+.tag-tech { color: var(--tech); border-color: var(--tech); background: rgba(6,182,212,0.08); }
+.tag-rest { color: var(--rest); border-color: var(--rest); background: rgba(107,114,128,0.08); }
+.tag-food { color: var(--accent); border-color: var(--accent); background: rgba(232,255,71,0.08); }
+
+.day-summary-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* Edit toolbar */
+.edit-toolbar {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 0.5px solid var(--border-light);
+  background: var(--card-bg);
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(12px);
+}
+.edit-btn:hover { border-color: var(--accent); color: var(--accent); }
+.edit-btn.active {
+  background: rgba(232,255,71,0.1);
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 20px rgba(232,255,71,0.15);
+}
+
+.add-block-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-top: 0.5px dashed var(--border);
+  color: var(--text-dim);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.add-block-btn:hover { color: var(--accent); background: rgba(232,255,71,0.04); }
+.add-block-btn span { font-size: 14px; line-height: 1; }
+
+/* MODAL */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(8px);
+  z-index: 300;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--card-bg);
+  border: 0.5px solid var(--border-light);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: modalIn 0.25s ease;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 0.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--text); }
+
+.modal-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+.form-input, .form-textarea, .form-select {
+  background: var(--off-black);
+  border: 0.5px solid var(--border-light);
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--accent);
+}
+.form-textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+.form-select { cursor: pointer; }
+.form-select option { background: var(--off-black); }
+
+.color-picker-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.color-swatch {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.color-swatch:hover { transform: scale(1.15); }
+.color-swatch.selected { border-color: var(--text); }
+
+.modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 0.5px solid var(--border);
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: 0.5px solid;
+  transition: all 0.2s;
+}
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border-light);
+  color: var(--text-dim);
+}
+.btn-ghost:hover { border-color: var(--text-muted); color: var(--text-muted); }
+.btn-danger {
+  background: rgba(248,113,113,0.1);
+  border-color: var(--brick);
+  color: var(--brick);
+}
+.btn-danger:hover { background: rgba(248,113,113,0.2); }
+.btn-primary {
+  background: rgba(232,255,71,0.12);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.btn-primary:hover { background: rgba(232,255,71,0.2); }
+
+/* Save indicator */
+.save-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--card-bg);
+  border: 0.5px solid var(--run);
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--run);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  z-index: 500;
+  transition: transform 0.3s ease;
+}
+.save-toast.show { transform: translateX(-50%) translateY(0); }
+
+/* GYM TABLE */
+.gym-table { width: 100%; border-collapse: collapse; }
+.gym-table th { text-align: left; font-size: 9px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); padding: 0.5rem 0.75rem; border-bottom: 0.5px solid var(--border); }
+.gym-table td { padding: 0.6rem 0.75rem; font-size: 13px; color: var(--text-muted); border-bottom: 0.5px solid var(--border); vertical-align: top; }
+.gym-table tr:last-child td { border-bottom: none; }
+.gym-table td:first-child { color: var(--text); font-weight: 500; }
+.gym-table td:nth-child(2) { font-family: 'DM Mono', monospace; color: var(--accent); white-space: nowrap; }
+
+/* PROGRESS BARS */
+.prog-row { display: flex; align-items: center; gap: 12px; margin: 6px 0; }
+.prog-label { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-muted); width: 60px; flex-shrink: 0; }
+.prog-track { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 2px; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
+.prog-val { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-dim); width: 65px; text-align: right; flex-shrink: 0; }
+
+/* DIET */
+.macro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 1rem; }
+.macro-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+.macro-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 0.02em; line-height: 1; }
+.macro-unit { font-size: 14px; color: var(--text-muted); }
+.macro-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); font-family: 'DM Mono', monospace; margin-top: 4px; }
+
+/* SUPP */
+.supp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+.supp-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+.supp-name { font-weight: 500; color: var(--text); margin-bottom: 3px; font-size: 13px; }
+.supp-dose { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent); margin-bottom: 4px; }
+.supp-why { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 1.5rem; }
+.timeline::before { content: ''; position: absolute; left: 5px; top: 8px; bottom: 0; width: 1px; background: var(--border); }
+.timeline-item { position: relative; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--border); }
+.timeline-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.timeline-dot { position: absolute; left: -1.5rem; top: 6px; width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--border); background: var(--off-black); }
+.timeline-item.unlocked .timeline-dot { background: var(--run); border-color: var(--run); box-shadow: 0 0 8px rgba(74,222,128,0.4); }
+.timeline-item.soon .timeline-dot { background: var(--cycle); border-color: var(--cycle); box-shadow: 0 0 8px rgba(251,146,60,0.3); }
+.timeline-item.future .timeline-dot { background: var(--border); border-color: var(--border-light); }
+.timeline-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.5rem; }
+.timeline-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.04em; line-height: 1; }
+.timeline-sub { font-size: 11px; color: var(--text-dim); font-family: 'DM Mono', monospace; margin-bottom: 0.75rem; }
+.timeline-body { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+.unlock-badge { font-size: 10px; font-family: 'DM Mono', monospace; padding: 4px 10px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; border: 0.5px solid; }
+.unlock-badge.green { color: var(--run); border-color: var(--run); background: rgba(74,222,128,0.08); }
+.unlock-badge.amber { color: var(--cycle); border-color: var(--cycle); background: rgba(251,146,60,0.08); }
+.unlock-badge.red { color: var(--brick); border-color: var(--brick); background: rgba(248,113,113,0.08); }
+
+/* PROG TABLE */
+.prog-table-wrap { overflow-x: auto; border-radius: 10px; border: 0.5px solid var(--border); }
+.prog-table { width: 100%; border-collapse: collapse; min-width: 560px; }
+.prog-table th { background: var(--off-black); text-align: left; font-size: 9px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); padding: 0.75rem 1rem; border-bottom: 0.5px solid var(--border); white-space: nowrap; }
+.prog-table td { padding: 0.65rem 1rem; font-size: 12px; color: var(--text-muted); border-bottom: 0.5px solid var(--border); }
+.prog-table tr:last-child td { border-bottom: none; }
+.prog-table td:first-child { font-family: 'DM Mono', monospace; color: var(--accent); }
+
+.month-nav { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+.month-nav-label { font-family: 'DM Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); }
+.month-slider { flex: 1; -webkit-appearance: none; appearance: none; height: 2px; background: var(--border); border-radius: 1px; outline: none; }
+.month-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); cursor: pointer; box-shadow: 0 0 8px rgba(232,255,71,0.5); }
+.month-display { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--accent); min-width: 40px; text-align: right; }
+
+.dynamic-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 1.5rem; }
+.dstat { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+.dstat-num { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; transition: all 0.3s ease; }
+.dstat-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); font-family: 'DM Mono', monospace; margin-top: 3px; }
+
 .spacer { height: 3rem; }
 
-/* RESPONSIVE */
 @media (max-width: 640px) {
   .header { padding: 0 1rem; }
   .header-stat:not(:last-child) { display: none; }
   .hero { padding: 90px 1rem 40px; }
   .main { padding: 0 1rem 3rem; }
   .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .time-block { grid-template-columns: 70px 1fr; }
+  .edit-toolbar { bottom: 16px; right: 16px; }
+  .modal { max-height: 95vh; }
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="logo">APEX</div>
   <div class="header-right">
@@ -750,7 +727,6 @@ body {
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-eyebrow">Complete training system — 12 month roadmap</div>
   <h1 class="hero-title">Build<br><span>Muscle.</span><br>Race.</h1>
@@ -774,7 +750,7 @@ body {
       <div class="hero-stat-label">Swim session</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-num">175<span>g</span></div>
+      <div class="hero-stat-num">178<span>g</span></div>
       <div class="hero-stat-label">Daily protein</div>
     </div>
     <div class="hero-stat">
@@ -783,9 +759,9 @@ body {
     </div>
   </div>
 
-  <!-- NAV TABS -->
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="showPanel('week', this)">Weekly split</button>
+    <button class="nav-tab" onclick="showPanel('routine', this)">Daily routine</button>
     <button class="nav-tab" onclick="showPanel('gym', this)">Gym workouts</button>
     <button class="nav-tab" onclick="showPanel('diet', this)">Diet + supplements</button>
     <button class="nav-tab" onclick="showPanel('prog', this)">Progression</button>
@@ -793,7 +769,6 @@ body {
   </div>
 </section>
 
-<!-- MAIN -->
 <main class="main">
 
   <!-- WEEKLY SPLIT -->
@@ -813,14 +788,8 @@ body {
       </div>
       <div class="day-note">// 2–3 hr gap between gym and run. Upper body lift = zero leg interference</div>
       <div class="day-metrics">
-        <div>
-          <div class="day-metric-val" style="color:var(--lift)">60<span style="font-size:14px;color:var(--text-muted)"> min</span></div>
-          <div class="day-metric-label">Gym</div>
-        </div>
-        <div>
-          <div class="day-metric-val" style="color:var(--run)">6<span style="font-size:14px;color:var(--text-muted)"> km</span></div>
-          <div class="day-metric-label">Run</div>
-        </div>
+        <div><div class="day-metric-val" style="color:var(--lift)">60<span style="font-size:14px;color:var(--text-muted)"> min</span></div><div class="day-metric-label">Gym</div></div>
+        <div><div class="day-metric-val" style="color:var(--run)">6<span style="font-size:14px;color:var(--text-muted)"> km</span></div><div class="day-metric-label">Run</div></div>
       </div>
     </div>
 
@@ -839,14 +808,8 @@ body {
       </div>
       <div class="day-note">// Cycling after legs = concentric dominant, different fatigue pathway. Keep it easy.</div>
       <div class="day-metrics">
-        <div>
-          <div class="day-metric-val" style="color:var(--lift)">65<span style="font-size:14px;color:var(--text-muted)"> min</span></div>
-          <div class="day-metric-label">Gym</div>
-        </div>
-        <div>
-          <div class="day-metric-val" style="color:var(--cycle)">25<span style="font-size:14px;color:var(--text-muted)"> km</span></div>
-          <div class="day-metric-label">Cycle</div>
-        </div>
+        <div><div class="day-metric-val" style="color:var(--lift)">65<span style="font-size:14px;color:var(--text-muted)"> min</span></div><div class="day-metric-label">Gym</div></div>
+        <div><div class="day-metric-val" style="color:var(--cycle)">25<span style="font-size:14px;color:var(--text-muted)"> km</span></div><div class="day-metric-label">Cycle</div></div>
       </div>
     </div>
 
@@ -865,14 +828,8 @@ body {
       </div>
       <div class="day-note">// Arms + core = zero leg fatigue. Tempo run on Wed builds your 70.3 half-marathon speed.</div>
       <div class="day-metrics">
-        <div>
-          <div class="day-metric-val" style="color:var(--accent)">55<span style="font-size:14px;color:var(--text-muted)"> min</span></div>
-          <div class="day-metric-label">Gym</div>
-        </div>
-        <div>
-          <div class="day-metric-val" style="color:var(--run)">5<span style="font-size:14px;color:var(--text-muted)"> km</span></div>
-          <div class="day-metric-label">Tempo</div>
-        </div>
+        <div><div class="day-metric-val" style="color:var(--accent)">55<span style="font-size:14px;color:var(--text-muted)"> min</span></div><div class="day-metric-label">Gym</div></div>
+        <div><div class="day-metric-val" style="color:var(--run)">5<span style="font-size:14px;color:var(--text-muted)"> km</span></div><div class="day-metric-label">Tempo</div></div>
       </div>
     </div>
 
@@ -891,14 +848,8 @@ body {
       </div>
       <div class="day-note">// Interval cycling builds the power output you need for brick day Saturday.</div>
       <div class="day-metrics">
-        <div>
-          <div class="day-metric-val" style="color:var(--lift)">60<span style="font-size:14px;color:var(--text-muted)"> min</span></div>
-          <div class="day-metric-label">Gym</div>
-        </div>
-        <div>
-          <div class="day-metric-val" style="color:var(--cycle)">20<span style="font-size:14px;color:var(--text-muted)"> km</span></div>
-          <div class="day-metric-label">Intervals</div>
-        </div>
+        <div><div class="day-metric-val" style="color:var(--lift)">60<span style="font-size:14px;color:var(--text-muted)"> min</span></div><div class="day-metric-label">Gym</div></div>
+        <div><div class="day-metric-val" style="color:var(--cycle)">20<span style="font-size:14px;color:var(--text-muted)"> km</span></div><div class="day-metric-label">Intervals</div></div>
       </div>
     </div>
 
@@ -939,9 +890,7 @@ body {
     <div class="day-card swim" style="margin-top:8px">
       <div class="day-header">
         <div class="day-name" style="font-size:20px">Sat evening</div>
-        <div class="day-badges">
-          <span class="badge swim">Swim only</span>
-        </div>
+        <div class="day-badges"><span class="badge swim">Swim only</span></div>
       </div>
       <div class="day-desc">
         M1: <span class="hl">800m</span> drills + 4×100m sets &nbsp;|&nbsp; M3: 1800m &nbsp;|&nbsp; M6: 2500m+ &nbsp;|&nbsp; M10+: 3800m<br>
@@ -954,14 +903,40 @@ body {
     <div class="day-card rest">
       <div class="day-header">
         <div class="day-name">Sunday</div>
-        <div class="day-badges">
-          <span class="badge rest">Full rest</span>
-        </div>
+        <div class="day-badges"><span class="badge rest">Full rest</span></div>
       </div>
       <div class="day-desc">
         Walk 10 min max, foam roll, mobility, 8–9 hrs sleep. Eat at maintenance.<br>
         <span class="hl">Muscle is built during rest.</span> This day is doing more work than you think.
       </div>
+    </div>
+  </div>
+
+  <!-- DAILY ROUTINE (EDITABLE) -->
+  <div class="panel" id="panel-routine">
+
+    <div class="section-label">Mon–Thu — dual session training days</div>
+    <div class="day-card study" style="margin-bottom:10px">
+      <div class="day-desc" style="font-size:12px">
+        <span class="hl">Sleep target:</span> 10 PM → 5 AM = 7 hrs &nbsp;|&nbsp; <span class="hl">CAT study:</span> 3.5 hrs/day &nbsp;|&nbsp; <span class="hl">Tech skills:</span> 1 hr/day &nbsp;|&nbsp; <span class="hl">Journal:</span> AM + PM
+      </div>
+    </div>
+
+    <!-- Routine days rendered by JS -->
+    <div id="routine-days-container"></div>
+
+    <div class="section-label">Weekly time allocation</div>
+    <div class="day-card study" style="padding:0; overflow:hidden">
+      <table class="gym-table">
+        <thead><tr><th>Activity</th><th>Mon–Thu</th><th>Friday</th><th>Saturday</th><th>Sunday</th><th>Weekly total</th></tr></thead>
+        <tbody>
+          <tr><td>CAT study</td><td>3.5 hr/day</td><td>4.25 hr</td><td>—</td><td>2 hr</td><td>~20 hrs</td></tr>
+          <tr><td>Tech skills</td><td>2 hr/day</td><td>2 hr</td><td>—</td><td>1 hr</td><td>~11 hrs</td></tr>
+          <tr><td>Training (gym + cardio)</td><td>2.5 hr/day</td><td>0.7 hr</td><td>4–5 hr</td><td>—</td><td>~15 hrs</td></tr>
+          <tr><td>Content creation</td><td>0.5 hr/day</td><td>2 hr</td><td>—</td><td>—</td><td>~4 hrs</td></tr>
+          <tr><td>Sleep</td><td>7 hr/night</td><td>7.5 hr</td><td>8–9 hr</td><td>8–9 hr</td><td>~52 hrs</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -1058,159 +1033,63 @@ body {
 
   <!-- DIET -->
   <div class="panel" id="panel-diet">
-    <div class="section-label">Daily macros — heavy training days (Mon–Thu + Sat)</div>
+    <div class="section-label">Daily macros — actual from your food log</div>
     <div class="macro-grid">
       <div class="macro-card">
-        <div class="macro-num" style="color:var(--brick)">3200<span class="macro-unit">kcal</span></div>
-        <div class="macro-label">Total calories</div>
+        <div class="macro-num" style="color:var(--brick)">~2900<span class="macro-unit">kcal</span></div>
+        <div class="macro-label">Estimated total</div>
       </div>
       <div class="macro-card">
-        <div class="macro-num" style="color:var(--lift)">180<span class="macro-unit">g</span></div>
+        <div class="macro-num" style="color:var(--lift)">178<span class="macro-unit">g</span></div>
         <div class="macro-label">Protein</div>
       </div>
       <div class="macro-card">
-        <div class="macro-num" style="color:var(--cycle)">440<span class="macro-unit">g</span></div>
+        <div class="macro-num" style="color:var(--cycle)">591<span class="macro-unit">g</span></div>
         <div class="macro-label">Carbs</div>
-      </div>
-      <div class="macro-card">
-        <div class="macro-num" style="color:var(--swim)">85<span class="macro-unit">g</span></div>
-        <div class="macro-label">Fats</div>
       </div>
       <div class="macro-card">
         <div class="macro-num" style="color:var(--run)">5.5<span class="macro-unit">L</span></div>
-        <div class="macro-label">Water</div>
+        <div class="macro-label">Water target</div>
       </div>
     </div>
 
-    <div class="section-label">Meal timing — dual session days</div>
-<div class="day-card lift" style="padding:0; overflow:hidden">
-  <table class="gym-table">
-    <thead>
-      <tr>
-        <th>Time</th>
-        <th>What to eat</th>
-        <th>Macros</th>
-        <th>Running Total (P / C)</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <tr>
-        <td>Wake (Pre-Gym)</td>
-        <td>Banana + 1 boiled potato + electrolytes</td>
-        <td>3g P · 50g C</td>
-        <td>3 / 50</td>
-      </tr>
-
-      <tr>
-        <td>Post-Gym</td>
-        <td>1 scoop whey + banana</td>
-        <td>25g P · 30g C</td>
-        <td>28 / 80</td>
-      </tr>
-
-      <tr>
-        <td>Breakfast</td>
-        <td>4 eggs + 60g chana + 1 potato</td>
-        <td>40g P · 50g C</td>
-        <td>68 / 130</td>
-      </tr>
-
-      <tr>
-        <td>Lunch</td>
-        <td>2 cups rice + dal + 50g soyabean + curd</td>
-        <td>50g P · 110g C</td>
-        <td>118 / 240</td>
-      </tr>
-
-      <tr>
-        <td>Pre-Run</td>
-        <td>2 bread + banana + honey + electrolytes</td>
-        <td>5g P · 80g C</td>
-        <td>123 / 320</td>
-      </tr>
-
-      <tr>
-        <td>During Run</td>
-        <td>1 banana + 2–3 dates + electrolytes</td>
-        <td>2g P · 45g C</td>
-        <td>125 / 365</td>
-      </tr>
-
-      <tr>
-        <td>Post-Run</td>
-        <td>Rice + dal + 30g soyabean</td>
-        <td>30g P · 80g C</td>
-        <td>155 / 445</td>
-      </tr>
-
-      <tr>
-        <td>Dinner</td>
-        <td>3 chapati + sabzi + curd + 60g chana</td>
-        <td>35g P · 90g C</td>
-        <td>190 / 535</td>
-      </tr>
-
-      <tr>
-        <td>Before Bed</td>
-        <td>300 ml milk</td>
-        <td>10g P · 15g C</td>
-        <td>200 / 550</td>
-      </tr>
-
-
-    </tbody>
-  </table>
-</div>
-
-    <div class="section-label">Saturday — brick + swim day (peak demand)</div>
-    <div class="macro-grid">
-      <div class="macro-card">
-        <div class="macro-num" style="color:var(--brick)">3500<span class="macro-unit">kcal</span></div>
-        <div class="macro-label">Saturday calories</div>
-      </div>
-      <div class="macro-card">
-        <div class="macro-num" style="color:var(--cycle)">510<span class="macro-unit">g</span></div>
-        <div class="macro-label">Carbs</div>
-      </div>
-      <div class="macro-card">
-        <div class="macro-num" style="color:var(--lift)">40<span class="macro-unit">g/hr</span></div>
-        <div class="macro-label">During brick</div>
-      </div>
+    <div class="section-label">Meal-by-meal breakdown — your actual foods</div>
+    <div class="day-card lift" style="padding:0; overflow:hidden">
+      <table class="gym-table">
+        <thead>
+          <tr>
+            <th>Meal / Time</th><th>What you eat</th><th>Carbs</th><th>Protein</th><th>Running total (P / C)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Meal 1 — Pre-gym</td><td>1 banana + 1 boiled potato (medium)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">54g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">3.8g</td><td style="font-family:'DM Mono',monospace;color:var(--text-dim)">4 / 54</td></tr>
+          <tr><td>Meal 2 — Post-gym</td><td>1 scoop whey + 1 banana</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">30g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">25.3g</td><td style="font-family:'DM Mono',monospace;color:var(--text-dim)">29 / 84</td></tr>
+          <tr><td>Meal 3 — Breakfast</td><td>4 eggs + 60g chana (cooked) + 1 potato</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">45.4g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">31.5g</td><td style="font-family:'DM Mono',monospace;color:var(--text-dim)">61 / 130</td></tr>
+          <tr><td>Meal 4 — Lunch</td><td>2 cups rice + dal (1 cup) + 50g soyabean + curd (100g)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">129.7g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">45.5g</td><td style="font-family:'DM Mono',monospace;color:var(--text-dim)">106 / 259</td></tr>
+          <tr><td>Meal 5 — Pre-cardio</td><td>2 bread + 1 banana + 1 tbsp honey</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">68g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">7.3g</td><td style="font-family:'DM Mono',monospace;color:var(--text-dim)">113 / 327</td></tr>
+          <tr><td>Meal 6 — During cardio</td><td>1 banana + 2–3 dates</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">45g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">1.8g</td><td style="font-family:'DM Mono',monospace;color:var(--text-dim)">115 / 372</td></tr>
+          <tr><td>Meal 7 — Post-cardio</td><td>1.5 cups rice + dal (0.5 cup) + 30g soyabean</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">86g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">25g</td><td style="font-family:'DM Mono',monospace;color:var(--text-dim)">140 / 458</td></tr>
+          <tr><td>Meal 8 — Dinner</td><td>3 chapati + sabzi + curd (100g) + 60g chana</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">84.7g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">19.5g</td><td style="font-family:'DM Mono',monospace;color:var(--text-dim)">160 / 543</td></tr>
+          <tr><td>Meal 9 — Before bed</td><td>300ml milk + 50g oats</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">48g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">18g</td><td style="font-family:'DM Mono',monospace;color:var(--text-dim)">178 / 591</td></tr>
+          <tr style="background:rgba(232,255,71,0.04)">
+            <td style="color:var(--accent);font-family:'DM Mono',monospace">Daily total</td>
+            <td style="color:var(--text)">Full day across 9 meals</td>
+            <td style="font-family:'DM Mono',monospace;color:var(--cycle);font-size:15px"><strong>591g</strong></td>
+            <td style="font-family:'DM Mono',monospace;color:var(--lift);font-size:15px"><strong>178g</strong></td>
+            <td style="font-family:'DM Mono',monospace;color:var(--text-muted)">✓ On target</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="section-label">Supplements — the non-negotiable stack</div>
     <div class="supp-grid">
-      <div class="supp-card">
-        <div class="supp-name">Creatine monohydrate</div>
-        <div class="supp-dose">5g every day</div>
-        <div class="supp-why">Strength, muscle volume, power output. Non-negotiable.</div>
-      </div>
-      <div class="supp-card">
-        <div class="supp-name">Whey protein</div>
-        <div class="supp-dose">1–2 scoops/day</div>
-        <div class="supp-why">Hit protein target conveniently post-workout.</div>
-      </div>
-      <div class="supp-card">
-        <div class="supp-name">Electrolytes</div>
-        <div class="supp-dose">During sessions 60+ min</div>
-        <div class="supp-why">Na + K + Mg. Prevents cramping, sustains power.</div>
-      </div>
-      <div class="supp-card">
-        <div class="supp-name">Vitamin D3 + K2</div>
-        <div class="supp-dose">2000–4000 IU D3 daily</div>
-        <div class="supp-why">Testosterone, bone density, immune function.</div>
-      </div>
-      <div class="supp-card">
-        <div class="supp-name">Omega-3</div>
-        <div class="supp-dose">2–3g EPA/DHA daily</div>
-        <div class="supp-why">Joint health, inflammation, vascularity support.</div>
-      </div>
-      <div class="supp-card">
-        <div class="supp-name">Magnesium glycinate</div>
-        <div class="supp-dose">300–400mg before bed</div>
-        <div class="supp-why">Sleep quality, muscle recovery, cramp prevention.</div>
-      </div>
+      <div class="supp-card"><div class="supp-name">Creatine monohydrate</div><div class="supp-dose">5g every day</div><div class="supp-why">Strength, muscle volume, power output. Non-negotiable.</div></div>
+      <div class="supp-card"><div class="supp-name">Whey protein</div><div class="supp-dose">1–2 scoops/day</div><div class="supp-why">Hit protein target conveniently post-workout.</div></div>
+      <div class="supp-card"><div class="supp-name">Electrolytes</div><div class="supp-dose">During sessions 60+ min</div><div class="supp-why">Na + K + Mg. Prevents cramping, sustains power.</div></div>
+      <div class="supp-card"><div class="supp-name">Vitamin D3 + K2</div><div class="supp-dose">2000–4000 IU D3 daily</div><div class="supp-why">Testosterone, bone density, immune function.</div></div>
+      <div class="supp-card"><div class="supp-name">Omega-3</div><div class="supp-dose">2–3g EPA/DHA daily</div><div class="supp-why">Joint health, inflammation, vascularity support.</div></div>
+      <div class="supp-card"><div class="supp-name">Magnesium glycinate</div><div class="supp-dose">300–400mg before bed</div><div class="supp-why">Sleep quality, muscle recovery, cramp prevention.</div></div>
     </div>
 
     <div class="section-label">Phase-wise calorie strategy</div>
@@ -1234,48 +1113,19 @@ body {
       <input type="range" min="1" max="12" value="1" class="month-slider" id="monthSlider">
       <span class="month-display" id="monthDisplay">1</span>
     </div>
-
     <div class="dynamic-stats">
-      <div class="dstat">
-        <div class="dstat-num" id="d-run" style="color:var(--run)">6 km</div>
-        <div class="dstat-label">Run / session</div>
-      </div>
-      <div class="dstat">
-        <div class="dstat-num" id="d-cycle" style="color:var(--cycle)">25 km</div>
-        <div class="dstat-label">Cycle / session</div>
-      </div>
-      <div class="dstat">
-        <div class="dstat-num" id="d-swim" style="color:var(--swim)">800m</div>
-        <div class="dstat-label">Swim / session</div>
-      </div>
-      <div class="dstat">
-        <div class="dstat-num" id="d-brick" style="color:var(--brick)">30+3</div>
-        <div class="dstat-label">Brick (km+km)</div>
-      </div>
-      <div class="dstat">
-        <div class="dstat-num" id="d-bw" style="color:var(--lift)">66 kg</div>
-        <div class="dstat-label">Target bodyweight</div>
-      </div>
+      <div class="dstat"><div class="dstat-num" id="d-run" style="color:var(--run)">6 km</div><div class="dstat-label">Run / session</div></div>
+      <div class="dstat"><div class="dstat-num" id="d-cycle" style="color:var(--cycle)">25 km</div><div class="dstat-label">Cycle / session</div></div>
+      <div class="dstat"><div class="dstat-num" id="d-swim" style="color:var(--swim)">800m</div><div class="dstat-label">Swim / session</div></div>
+      <div class="dstat"><div class="dstat-num" id="d-brick" style="color:var(--brick)">30+3</div><div class="dstat-label">Brick (km+km)</div></div>
+      <div class="dstat"><div class="dstat-num" id="d-bw" style="color:var(--lift)">66 kg</div><div class="dstat-label">Target bodyweight</div></div>
     </div>
-
     <div class="section-label">Strength progression targets</div>
-    <div class="day-card lift">
-      <div id="strength-bars"></div>
-    </div>
-
+    <div class="day-card lift"><div id="strength-bars"></div></div>
     <div class="section-label">Full monthly progression table</div>
     <div class="prog-table-wrap">
       <table class="prog-table">
-        <thead>
-          <tr>
-            <th>Month</th>
-            <th>Run (session)</th>
-            <th>Cycle (session)</th>
-            <th>Swim (session)</th>
-            <th>Brick</th>
-            <th>Body weight</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Month</th><th>Run (session)</th><th>Cycle (session)</th><th>Swim (session)</th><th>Brick</th><th>Body weight</th></tr></thead>
         <tbody>
           <tr><td>M1</td><td>6 km</td><td>25 km</td><td>800m</td><td>30+3 km</td><td>66–67 kg</td></tr>
           <tr><td>M2</td><td>8 km</td><td>35 km</td><td>1200m</td><td>40+5 km</td><td>67–68 kg</td></tr>
@@ -1284,12 +1134,11 @@ body {
           <tr><td>M5</td><td>16 km</td><td>80 km</td><td>2600m</td><td>80+14 km</td><td>69–70 kg</td></tr>
           <tr><td>M6</td><td>18 km</td><td>90 km</td><td>3000m</td><td>90+18 km</td><td>70 kg</td></tr>
           <tr><td>M8</td><td>21 km</td><td>100 km</td><td>3500m</td><td>90+21 km</td><td>70–71 kg</td></tr>
-          <tr><td>M10</td><td>25 km</td><td>120 km</td><td>3800m</td><td>Full 70.3 sim</td><td>70–72 kg</td></tr>
+          <tr><td>M10</td><td>25 km</td><td>120 km</td><td>3800m</td><td>Full 70.3 sim</td><td>70–71 kg</td></tr>
           <tr><td>M12</td><td>30 km</td><td>140 km</td><td>4200m</td><td>Race ready</td><td>70–72 kg</td></tr>
         </tbody>
       </table>
     </div>
-
     <div class="section-label">Body composition trajectory</div>
     <div class="day-card lift" style="padding:0; overflow:hidden">
       <table class="gym-table">
@@ -1324,7 +1173,6 @@ body {
         </div>
         <div class="timeline-body">By month 3 your run base hits 10 km, strength is solid, and dual-session conditioning handles the stations easily. Race Hyrox Open category. Sub-1:30 finish realistic by month 6.</div>
       </div>
-
       <div class="timeline-item soon">
         <div class="timeline-dot"></div>
         <div class="timeline-header">
@@ -1342,7 +1190,6 @@ body {
         </div>
         <div class="timeline-body">By month 10 swim hits 3800m+ (comfortable over 1.9 km race distance), brick at 90+21, aerobic base deep enough. Finish time target: 5:30–6:30 hr. Your gym base means your run off the bike will be stronger than most pure triathletes.</div>
       </div>
-
       <div class="timeline-item future">
         <div class="timeline-dot"></div>
         <div class="timeline-header">
@@ -1358,10 +1205,9 @@ body {
           <div class="prog-row"><span class="prog-label">Run</span><div class="prog-track"><div class="prog-fill" style="width:25%;background:var(--run)"></div></div><span class="prog-val">Need 42 km</span></div>
           <div class="prog-row"><span class="prog-label">Total base</span><div class="prog-track"><div class="prog-fill" style="width:20%;background:var(--brick)"></div></div><span class="prog-val">18 months</span></div>
         </div>
-        <div class="timeline-body">Complete at least one 70.3 first. Your body needs 6+ months of high-volume training post-half before full distance is safe. Target: Year 2. Finish target first attempt: 11–13 hr. Your muscular base will carry you through the marathon at the end when pure triathletes are falling apart.</div>
+        <div class="timeline-body">Complete at least one 70.3 first. Your body needs 6+ months of high-volume training post-half before full distance is safe. Target: Year 2. Finish target first attempt: 11–13 hr.</div>
       </div>
     </div>
-
     <div class="section-label">Full timeline summary</div>
     <div class="prog-table-wrap">
       <table class="prog-table">
@@ -1381,14 +1227,487 @@ body {
   <div class="spacer"></div>
 </main>
 
+<!-- Edit toolbar (only visible on routine tab) -->
+<div class="edit-toolbar" id="edit-toolbar" style="display:none">
+  <button class="edit-btn" id="reset-btn" onclick="confirmReset()" title="Reset to defaults">↺ Reset</button>
+  <button class="edit-btn" id="edit-toggle-btn" onclick="toggleEditMode()">✎ Edit routine</button>
+</div>
+
+<!-- Edit Block Modal -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title-text">Edit block</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Time slot</label>
+        <input class="form-input" id="edit-time" type="text" placeholder="e.g. 5:00–6:00 AM">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Activity name</label>
+        <input class="form-input" id="edit-activity" type="text" placeholder="e.g. CAT Study — Block 1">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Details / notes</label>
+        <textarea class="form-textarea" id="edit-detail" placeholder="Optional description of this block..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Dot color</label>
+        <div class="color-picker-row" id="color-picker"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" id="delete-btn" onclick="deleteBlock()">Delete</button>
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveBlock()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Block Modal -->
+<div class="modal-overlay" id="add-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Add time block</div>
+      <button class="modal-close" onclick="closeAddModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Time slot</label>
+        <input class="form-input" id="add-time" type="text" placeholder="e.g. 6:00–7:00 AM">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Activity name</label>
+        <input class="form-input" id="add-activity" type="text" placeholder="e.g. Morning run">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Details / notes</label>
+        <textarea class="form-textarea" id="add-detail" placeholder="Optional description..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Dot color</label>
+        <div class="color-picker-row" id="add-color-picker"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeAddModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmAddBlock()">Add block</button>
+    </div>
+  </div>
+</div>
+
+<!-- Save toast -->
+<div class="save-toast" id="save-toast">✓ Saved to your device</div>
+
 <script>
+// ─── DEFAULT ROUTINE DATA ─────────────────────────────────────────────────────
+const DEFAULT_ROUTINE = {
+  monthu: {
+    title: 'Monday → Thursday',
+    meta: 'Gym + CAT study + tech skills + dual cardio session',
+    titleColor: 'var(--study)',
+    badges: [
+      { cls: 'study', label: 'CAT' },
+      { cls: 'lift', label: 'Gym' },
+      { cls: 'run', label: 'Cardio' },
+      { cls: 'tech', label: 'Tech' }
+    ],
+    blocks: [
+      { time: '5:00 AM', activity: 'Wake up', detail: 'No phone. Drink 500ml water immediately. Splash cold water on face.', dot: '#e8ff47' },
+      { time: '5:00–5:15', activity: 'Journal + brush', detail: 'Brain dump: 3 things grateful for, 1 goal for the day, 1 thing to improve. Brush teeth. Ready for deep work.', dot: '#f59e0b' },
+      { time: '5:15–7:15', activity: 'CAT Deep Study — Block 1', detail: 'Quant or VARC — whichever is weaker. No phone, no music. Full focus. Do 1 full topic or 40 questions minimum. 5 min break at 6:15.', dot: '#f59e0b' },
+      { time: '7:15–7:30', activity: 'Pre-gym meal + prep', detail: 'Banana + 1 boiled potato + electrolytes. Change into gym clothes. Pack gym bag.', dot: '#e8ff47' },
+      { time: '7:30–9:00', activity: 'Gym session', detail: 'Mon: Upper push+pull · Tue: Lower body · Wed: Arms+core · Thu: Chest+back. No scrolling between sets — rest 60–90s and go.', dot: '#c084fc' },
+      { time: '9:00–9:15', activity: 'Post-gym shake + shower', detail: '1 scoop whey + banana immediately post-gym. Quick shower. Back to desk within 30 min.', dot: '#e8ff47' },
+      { time: '9:30–10:30', activity: 'CAT Study — Block 2', detail: 'Switch section: if Block 1 was Quant, do VARC or LRDI now. Review errors from yesterday. Active recall, not re-reading.', dot: '#f59e0b' },
+      { time: '10:30–11:15', activity: 'Breakfast', detail: '4 eggs + 60g chana + 1 potato. Eat slowly, no screen. This is also mental recovery time.', dot: '#e8ff47' },
+      { time: '11:15–1:15', activity: 'Tech skills', detail: 'Coding / DSA / projects / system design. Build something, don\'t just watch tutorials. 25 min focused sprints (Pomodoro). Log progress daily.', dot: '#06b6d4' },
+      { time: '1:15–2:00', activity: 'Lunch + rest', detail: '2 cups rice + dal + 50g soyabean + curd. 20 min nap optional — set alarm. Don\'t let it become 2 hrs.', dot: '#e8ff47' },
+      { time: '2:00–3:00', activity: 'Tech work', detail: 'Continue tech skills or project work.', dot: '#e8ff47' },
+      { time: '3:00–4:30', activity: 'CAT — Mock / Practice', detail: 'Timed sectional mock or full slot drill. Review every error — understand the concept, don\'t just note the answer.', dot: '#f59e0b' },
+      { time: '4:30–5:00', activity: 'Pre-cardio fuel', detail: '2 bread + banana + 1 tbsp honey + electrolytes. Eat 30–40 min before session starts.', dot: '#e8ff47' },
+      { time: '5:00–6:30', activity: 'Cardio session', detail: 'Mon: 6 km Zone 2 · Wed: 5 km tempo · Tue: 25 km easy spin · Thu: 20 km intervals. Banana + dates during if 60+ min.', dot: '#4ade80' },
+      { time: '6:30–7:15', activity: 'Post-cardio meal + shower', detail: 'Rice + dal + 30g soyabean. Shower. Shift to evening wind-down mode.', dot: '#e8ff47' },
+      { time: '7:15–8:15', activity: 'Content creation and editing', detail: 'Build your content here, complete daily tasks and build yourself.', dot: '#06b6d4' },
+      { time: '8:15–9:00', activity: 'Dinner', detail: '3 chapati + sabzi + curd + 60g chana. Family time. No screens at the table.', dot: '#e8ff47' },
+      { time: '9:00–9:30', activity: 'Wind-down ritual', detail: '300ml milk + 50g oats. Magnesium glycinate. Dim all screens. Read physical book or notes (not phone).', dot: '#6b7280' },
+      { time: '9:00–10:00', activity: 'Night reading', detail: 'Fiction, philosophy, or biographies. Nothing study-related. This trains your brain to associate reading with sleep.', dot: '#6b7280' },
+      { time: '9:45–10:00', activity: 'Night journal', detail: 'What did I accomplish today? What did I skip and why? What\'s tomorrow\'s #1 priority? 5 lines max — keep it honest.', dot: '#f59e0b' },
+      { time: '10:00 PM', activity: 'Sleep — lights out', detail: 'Phone on DND, outside the room. 10 PM → 5 AM = exactly 7 hrs. Non-negotiable.', dot: '#6b7280' }
+    ]
+  },
+  friday: {
+    title: 'Friday',
+    meta: 'Light gym + deep study + content creation + tech skills',
+    titleColor: 'var(--content)',
+    badges: [
+      { cls: 'study', label: 'CAT' },
+      { cls: 'rest', label: 'Light gym' },
+      { cls: 'content', label: 'Content' },
+      { cls: 'tech', label: 'Tech' }
+    ],
+    blocks: [
+      { time: '5:00 AM', activity: 'Wake up + journal', detail: 'Same morning ritual. 500ml water. Brain dump journal. No gym bag to pack — use that extra energy for deep focus.', dot: '#e8ff47' },
+      { time: '5:15–7:15', activity: 'CAT — Hardest material', detail: 'Friday = no gym fatigue in the morning. Use this for your hardest CAT topics: permutation, probability, complex LRDI sets. This is your peak focus window of the week.', dot: '#f59e0b' },
+      { time: '7:15–7:30', activity: 'Pre-gym meal + prep', detail: 'Banana + 1 boiled potato + electrolytes. Change into gym clothes.', dot: '#e8ff47' },
+      { time: '7:30–9:00', activity: 'Light gym session', detail: 'Lateral raise 4×15, face pull 3×20, rear delt fly 3×15, farmer carry 3×30m. Under 40 min. No cardio. No legs.', dot: '#c084fc' },
+      { time: '9:00–9:15', activity: 'Post-gym shake + shower', detail: '1 scoop whey + banana immediately. Quick shower. Back to desk.', dot: '#e8ff47' },
+      { time: '9:30–10:30', activity: 'CAT Study — Block 2', detail: 'Second section rotation. Keep momentum from the morning.', dot: '#f59e0b' },
+      { time: '10:30–11:15', activity: 'Breakfast', detail: '4 eggs + 60g chana + 1 potato. Eat slowly, no screen.', dot: '#e8ff47' },
+      { time: '11:15–1:15', activity: 'Deep tech skills', detail: 'No gym, no cardio tonight = full energy for complex problems. DSA hard problems, system design, or building a portfolio project feature.', dot: '#06b6d4' },
+      { time: '1:15–2:15', activity: 'Lunch + rest', detail: '2 cups rice + dal + 50g soyabean + curd. 20 min nap. You\'re building for Saturday — don\'t push it.', dot: '#e8ff47' },
+      { time: '2:30–3:30', activity: 'Tech Skills', detail: 'Continue tech work.', dot: '#f59e0b' },
+      { time: '3:30–5:30', activity: 'CAT study', detail: 'Light optional session.', dot: '#ec4899' },
+      { time: '5:30–8:00', activity: 'Dinner prep + family / social time', detail: 'Eat well. Relax completely. Social connection is recovery too.', dot: '#6b7280' },
+      { time: '8:00–8:30', activity: 'Dinner', detail: '3 chapati + sabzi + curd + 60g chana. Higher carbs than usual — loading for Saturday brick.', dot: '#e8ff47' },
+      { time: '8:30–9:00', activity: 'Saturday brick prep + wind-down', detail: 'Lay out gear: cycling kit, shoes, nutrition (dates, electrolytes). Charge devices. Set alarm for 4:45 AM.', dot: '#6b7280' },
+      { time: '9:00–10:00', activity: 'Night reading', detail: 'Fiction, philosophy, or biographies. Nothing study-related.', dot: '#6b7280' },
+      { time: '9:45–10:00', activity: 'Night journal', detail: 'What did I accomplish today? What\'s tomorrow\'s #1 priority? 5 lines max.', dot: '#f59e0b' },
+      { time: '10:00 PM', activity: 'Sleep — lights out', detail: 'Phone on DND. Sleep by 9:30 tonight for brick day tomorrow.', dot: '#6b7280' }
+    ]
+  },
+  saturday: {
+    title: 'Saturday',
+    meta: 'Brick session + swim + full afternoon recovery',
+    titleColor: 'var(--brick)',
+    badges: [
+      { cls: 'cycle', label: 'Brick' },
+      { cls: 'swim', label: 'Swim' },
+      { cls: 'rest', label: 'Recovery' }
+    ],
+    blocks: [
+      { time: '4:45 AM', activity: 'Wake up — brick day', detail: '500ml water + electrolytes immediately. Journal 3 lines max. Gear already laid out from Friday night.', dot: '#e8ff47' },
+      { time: '5:00–5:20', activity: 'Pre-brick fuel', detail: 'Banana + 2 boiled potatoes + honey + electrolytes. 50–60g carbs before you roll. Digest 20 min while you gear up.', dot: '#e8ff47' },
+      { time: '5:30–8:30', activity: 'Brick session', detail: 'M1: 30 km + 3 km · M3: 60 km + 7 km · M6: 90 km + 15 km. Eat 30–40g carbs/hr on bike (dates + banana). No sitting at transition.', dot: '#f87171' },
+      { time: '8:30–9:00', activity: 'Post-brick recovery meal', detail: '1 scoop whey + banana + electrolytes immediately. Shower. Compress legs if you have it.', dot: '#e8ff47' },
+      { time: '9:00–12:00', activity: 'Full recovery block', detail: 'Eat big lunch (rice + dal + soyabean + curd). Nap 60–90 min. Legs up the wall 10 min. Light walk only. No study, no screens.', dot: '#6b7280' },
+      { time: '12:00–3:00', activity: 'Rest + eat + light content', detail: 'Can do light meal. Full rest — your body is rebuilding right now.', dot: '#6b7280' },
+      { time: '3:00–3:30', activity: 'Pre-swim fuel', detail: '2 bread + banana + honey. Light carb load. Swim is upper body — your legs are resting.', dot: '#e8ff47' },
+      { time: '3:30–6:30', activity: 'Swim session', detail: 'M1: 800m drills + 4×100m · M3: 1800m · M6: 2500m+ · M10: 3800m. Focus: catch phase, hip rotation, bilateral breathing. Flushes leg fatigue.', dot: '#38bdf8' },
+      { time: '7:00–7:30', activity: 'Post-swim meal + shower', detail: 'Rice + dal + 30g soyabean. This is a reward meal — eat well. Shower cold if possible.', dot: '#e8ff47' },
+      { time: '8:00–9:00', activity: 'Dinner + wind-down', detail: 'Big dinner: 3 chapati + sabzi + curd + chana. 300ml milk + 50g oats before bed. Read 10 min.', dot: '#6b7280' },
+      { time: '9:00–10:00', activity: 'Night reading', detail: 'Fiction, philosophy, or biographies. Nothing study-related.', dot: '#6b7280' },
+      { time: '9:45–10:00', activity: 'Night journal', detail: 'What did I accomplish today? What\'s tomorrow\'s #1 priority? 5 lines max.', dot: '#f59e0b' },
+      { time: '10:00 PM', activity: 'Sleep — lights out', detail: '10 PM → 5 AM. Non-negotiable.', dot: '#6b7280' }
+    ]
+  },
+  sunday: {
+    title: 'Sunday',
+    meta: 'Recovery + 3 hr CAT + skill building + weekly reset',
+    titleColor: 'var(--run)',
+    badges: [
+      { cls: 'rest', label: 'Recovery' },
+      { cls: 'study', label: 'CAT' },
+      { cls: 'tech', label: 'Skills' }
+    ],
+    blocks: [
+      { time: '6:00–7:00', activity: 'Wake up naturally + slow morning', detail: 'No alarm. Hydrate. Light walk + sunlight. Calm start = nervous system recovery.', dot: '#e8ff47' },
+      { time: '7:00–8:00', activity: 'Breakfast + relax', detail: 'Eat well. No rush. Avoid phone overload.', dot: '#e8ff47' },
+      { time: '8:00–10:00', activity: 'CAT Review + Weak Areas', detail: 'Error log + weak topics only. No new concepts.', dot: '#f59e0b' },
+      { time: '10:00–11:00', activity: 'Light Practice / Section Drill', detail: 'Low pressure solving. Focus on accuracy, not speed.', dot: '#f59e0b' },
+      { time: '11:00–1:00', activity: 'Free time / social / family', detail: 'Completely disconnect from study. Mental reset is priority.', dot: '#6b7280' },
+      { time: '1:00–2:00', activity: 'Lunch', detail: 'Balanced meal. Relax.', dot: '#e8ff47' },
+      { time: '2:00–5:00', activity: 'Skill building (3 hrs)', detail: 'Rotate weekly: Tech (DSA / projects), Content creation (editing, scripting), Communication / speaking, Business / income skills.', dot: '#06b6d4' },
+      { time: '5:00–8:00', activity: 'Full rest — no work', detail: 'Watch, go out, talk, relax. This is mandatory recovery.', dot: '#6b7280' },
+      { time: '8:00–8:30', activity: 'Dinner', detail: 'Balanced dinner. Enjoy it.', dot: '#e8ff47' },
+      { time: '8:30–9:00', activity: 'Weekly planning', detail: 'Plan next week. Set top 3 priorities.', dot: '#f59e0b' },
+      { time: '9:00–9:30', activity: 'Reading', detail: 'Books only. No screens.', dot: '#6b7280' },
+      { time: '10:00 PM', activity: 'Sleep (7.5–8 hrs)', detail: 'Fully charged for Monday.', dot: '#6b7280' }
+    ]
+  }
+};
+
+const COLORS = [
+  '#e8ff47', '#4ade80', '#fb923c', '#38bdf8',
+  '#c084fc', '#f87171', '#6b7280', '#f59e0b',
+  '#ec4899', '#06b6d4', '#f0ede6', '#a78bfa'
+];
+
+const STORAGE_KEY = 'apex_routine_v1';
+let routineData = {};
+let editMode = false;
+let currentEditDay = null;
+let currentEditBlock = null;
+let addTargetDay = null;
+let selectedColor = '#e8ff47';
+let addSelectedColor = '#e8ff47';
+
+// ─── STORAGE ──────────────────────────────────────────────────────────────────
+function loadData() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      routineData = JSON.parse(saved);
+    } else {
+      routineData = JSON.parse(JSON.stringify(DEFAULT_ROUTINE));
+    }
+  } catch(e) {
+    routineData = JSON.parse(JSON.stringify(DEFAULT_ROUTINE));
+  }
+}
+
+function saveData() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(routineData));
+    showToast();
+  } catch(e) {
+    console.warn('Storage error', e);
+  }
+}
+
+function showToast() {
+  const t = document.getElementById('save-toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function renderRoutine() {
+  const container = document.getElementById('routine-days-container');
+  container.innerHTML = '';
+
+  const dayKeys = ['monthu', 'friday', 'saturday', 'sunday'];
+  const labels = {
+    monthu: 'Mon–Thu — dual session training days',
+    friday: 'Friday — no cardio, max output day',
+    saturday: 'Saturday — brick + swim + recovery',
+    sunday: 'Sunday — recovery + skill growth'
+  };
+
+  dayKeys.forEach(dayKey => {
+    const day = routineData[dayKey];
+    if (!day) return;
+
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'section-label';
+    labelDiv.textContent = labels[dayKey];
+    container.appendChild(labelDiv);
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'routine-day';
+
+    // Header
+    const header = document.createElement('div');
+    header.className = 'routine-day-header';
+    header.onclick = () => toggleRoutine(dayKey);
+
+    const badges = day.badges.map(b =>
+      `<span class="badge ${b.cls}">${b.label}</span>`
+    ).join('');
+
+    header.innerHTML = `
+      <div>
+        <div class="routine-day-title" style="color:${day.titleColor}">${day.title}</div>
+        <div class="routine-day-meta">${day.meta}</div>
+      </div>
+      <div class="day-summary-chips">${badges}</div>
+      <span class="routine-chevron" id="chevron-${dayKey}">▼</span>
+    `;
+    wrapper.appendChild(header);
+
+    // Body
+    const body = document.createElement('div');
+    body.className = 'routine-body';
+    body.id = 'body-' + dayKey;
+
+    day.blocks.forEach((block, idx) => {
+      const tb = document.createElement('div');
+      tb.className = 'time-block';
+      if (editMode) tb.onclick = () => openEditModal(dayKey, idx);
+      tb.innerHTML = `
+        <div class="edit-hint">✎ tap to edit</div>
+        <div class="time-slot">${block.time}</div>
+        <div class="time-content">
+          <div class="time-activity">
+            <div class="time-dot" style="background:${block.dot}"></div>
+            ${block.activity}
+          </div>
+          ${block.detail ? `<div class="time-detail">${block.detail}</div>` : ''}
+        </div>
+      `;
+      body.appendChild(tb);
+    });
+
+    // Add block button (only in edit mode)
+    if (editMode) {
+      const addBtn = document.createElement('button');
+      addBtn.className = 'add-block-btn';
+      addBtn.innerHTML = '<span>+</span> Add time block';
+      addBtn.onclick = (e) => { e.stopPropagation(); openAddModal(dayKey); };
+      body.appendChild(addBtn);
+    }
+
+    wrapper.appendChild(body);
+    container.appendChild(wrapper);
+  });
+
+  if (editMode) {
+    container.classList.add('edit-mode');
+  } else {
+    container.classList.remove('edit-mode');
+  }
+}
+
+// ─── TOGGLE / ACCORDION ───────────────────────────────────────────────────────
+function toggleRoutine(id) {
+  const body = document.getElementById('body-' + id);
+  const chevron = document.getElementById('chevron-' + id);
+  if (!body) return;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  if (chevron) chevron.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+
+// ─── EDIT MODE ────────────────────────────────────────────────────────────────
+function toggleEditMode() {
+  editMode = !editMode;
+  const btn = document.getElementById('edit-toggle-btn');
+  btn.classList.toggle('active', editMode);
+  btn.textContent = editMode ? '✓ Done editing' : '✎ Edit routine';
+  renderRoutine();
+  // Re-open all accordions in edit mode for convenience
+  if (editMode) {
+    ['monthu','friday','saturday','sunday'].forEach(id => {
+      const body = document.getElementById('body-' + id);
+      const chevron = document.getElementById('chevron-' + id);
+      if (body) body.classList.add('open');
+      if (chevron) chevron.style.transform = 'rotate(180deg)';
+    });
+  }
+}
+
+// ─── COLOR PICKER ─────────────────────────────────────────────────────────────
+function buildColorPicker(containerId, selectedClr, onChange) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  COLORS.forEach(c => {
+    const sw = document.createElement('div');
+    sw.className = 'color-swatch' + (c === selectedClr ? ' selected' : '');
+    sw.style.background = c;
+    sw.onclick = () => {
+      container.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+      sw.classList.add('selected');
+      onChange(c);
+    };
+    container.appendChild(sw);
+  });
+}
+
+// ─── EDIT MODAL ───────────────────────────────────────────────────────────────
+function openEditModal(dayKey, blockIdx) {
+  if (!editMode) return;
+  currentEditDay = dayKey;
+  currentEditBlock = blockIdx;
+  const block = routineData[dayKey].blocks[blockIdx];
+  selectedColor = block.dot;
+
+  document.getElementById('modal-title-text').textContent = 'Edit block';
+  document.getElementById('edit-time').value = block.time;
+  document.getElementById('edit-activity').value = block.activity;
+  document.getElementById('edit-detail').value = block.detail || '';
+  buildColorPicker('color-picker', selectedColor, (c) => { selectedColor = c; });
+
+  document.getElementById('edit-modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('edit-modal').classList.remove('open');
+}
+
+function saveBlock() {
+  if (currentEditDay === null || currentEditBlock === null) return;
+  const block = routineData[currentEditDay].blocks[currentEditBlock];
+  block.time = document.getElementById('edit-time').value.trim();
+  block.activity = document.getElementById('edit-activity').value.trim();
+  block.detail = document.getElementById('edit-detail').value.trim();
+  block.dot = selectedColor;
+  saveData();
+  closeModal();
+  renderRoutine();
+  // Re-open accordion
+  setTimeout(() => {
+    const body = document.getElementById('body-' + currentEditDay);
+    const chevron = document.getElementById('chevron-' + currentEditDay);
+    if (body) body.classList.add('open');
+    if (chevron) chevron.style.transform = 'rotate(180deg)';
+  }, 50);
+}
+
+function deleteBlock() {
+  if (currentEditDay === null || currentEditBlock === null) return;
+  if (!confirm('Delete this time block?')) return;
+  routineData[currentEditDay].blocks.splice(currentEditBlock, 1);
+  saveData();
+  closeModal();
+  renderRoutine();
+  setTimeout(() => {
+    const body = document.getElementById('body-' + currentEditDay);
+    const chevron = document.getElementById('chevron-' + currentEditDay);
+    if (body) body.classList.add('open');
+    if (chevron) chevron.style.transform = 'rotate(180deg)';
+  }, 50);
+}
+
+// ─── ADD MODAL ────────────────────────────────────────────────────────────────
+function openAddModal(dayKey) {
+  addTargetDay = dayKey;
+  addSelectedColor = '#e8ff47';
+  document.getElementById('add-time').value = '';
+  document.getElementById('add-activity').value = '';
+  document.getElementById('add-detail').value = '';
+  buildColorPicker('add-color-picker', addSelectedColor, (c) => { addSelectedColor = c; });
+  document.getElementById('add-modal').classList.add('open');
+}
+
+function closeAddModal() {
+  document.getElementById('add-modal').classList.remove('open');
+}
+
+function confirmAddBlock() {
+  const time = document.getElementById('add-time').value.trim();
+  const activity = document.getElementById('add-activity').value.trim();
+  if (!activity) { document.getElementById('add-activity').focus(); return; }
+  const detail = document.getElementById('add-detail').value.trim();
+  routineData[addTargetDay].blocks.push({
+    time: time || '–',
+    activity,
+    detail,
+    dot: addSelectedColor
+  });
+  saveData();
+  closeAddModal();
+  renderRoutine();
+  setTimeout(() => {
+    const body = document.getElementById('body-' + addTargetDay);
+    const chevron = document.getElementById('chevron-' + addTargetDay);
+    if (body) body.classList.add('open');
+    if (chevron) chevron.style.transform = 'rotate(180deg)';
+  }, 50);
+}
+
+// ─── RESET ────────────────────────────────────────────────────────────────────
+function confirmReset() {
+  if (!confirm('Reset ALL routine blocks to the original defaults? This cannot be undone.')) return;
+  routineData = JSON.parse(JSON.stringify(DEFAULT_ROUTINE));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(routineData));
+  renderRoutine();
+  showToast();
+}
+
+// ─── PANEL SWITCHING ──────────────────────────────────────────────────────────
 function showPanel(id, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('panel-' + id).classList.add('active');
   el.classList.add('active');
+
+  const toolbar = document.getElementById('edit-toolbar');
+  toolbar.style.display = id === 'routine' ? 'flex' : 'none';
 }
 
+// ─── PROGRESSION SLIDER ───────────────────────────────────────────────────────
 const monthData = [
   null,
   { run:'6 km', cycle:'25 km', swim:'800m', brick:'30+3', bw:'66–67 kg', sq:66, bp:62, pu:'BW', dl:70, ohp:40 },
@@ -1413,7 +1732,6 @@ function updateSlider(val) {
   document.getElementById('d-swim').textContent = d.swim;
   document.getElementById('d-brick').textContent = d.brick;
   document.getElementById('d-bw').textContent = d.bw;
-
   const maxVals = { sq: 110, bp: 100, dl: 118, ohp: 68 };
   document.getElementById('strength-bars').innerHTML = `
     <div class="prog-row"><span class="prog-label">Squat</span><div class="prog-track"><div class="prog-fill" style="width:${Math.round(d.sq/maxVals.sq*100)}%;background:var(--lift)"></div></div><span class="prog-val">${d.sq} kg</span></div>
@@ -1428,17 +1746,18 @@ document.getElementById('monthSlider').addEventListener('input', function() {
   updateSlider(parseInt(this.value));
 });
 
-updateSlider(1);
-
-document.querySelectorAll('.day-card').forEach(card => {
-  card.addEventListener('mouseenter', function() {
-    this.style.transform = 'translateX(3px)';
-    this.style.transition = 'transform 0.2s ease';
-  });
-  card.addEventListener('mouseleave', function() {
-    this.style.transform = 'translateX(0)';
-  });
+// Close modals on overlay click
+document.getElementById('edit-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
 });
+document.getElementById('add-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeAddModal();
+});
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+loadData();
+renderRoutine();
+updateSlider(1);
 </script>
 </body>
 </html>
