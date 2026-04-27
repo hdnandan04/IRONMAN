@@ -37,7 +37,7 @@ body {
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   line-height: 1.6;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar { width: 3px; }
@@ -631,14 +631,7 @@ body {
 .save-toast.show { transform: translateX(-50%) translateY(0); }
 
 /* GYM TABLE */
-  .table-scroll {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-.gym-table {
-  min-width: 650px; /* 🔥 forces scroll */
-}
+.gym-table { width: 100%; border-collapse: collapse; }
 .gym-table th { text-align: left; font-size: 9px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); padding: 0.5rem 0.75rem; border-bottom: 0.5px solid var(--border); }
 .gym-table td { padding: 0.6rem 0.75rem; font-size: 13px; color: var(--text-muted); border-bottom: 0.5px solid var(--border); vertical-align: top; }
 .gym-table tr:last-child td { border-bottom: none; }
@@ -653,29 +646,8 @@ body {
 .prog-val { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-dim); width: 65px; text-align: right; flex-shrink: 0; }
 
 /* DIET */
-.macro-grid {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 1rem;
-
-  overflow-x: auto;                 /* 🔥 enables horizontal scroll */
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.macro-grid::-webkit-scrollbar {
-  display: none;
-}
-
-.macro-card {
-  background: var(--card-bg);
-  border: 0.5px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-
-  min-width: 140px;   /* 🔥 important: prevents shrinking */
-  flex: 0 0 auto;     /* 🔥 keeps cards in one row */
-}
+.macro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 1rem; }
+.macro-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
 .macro-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 0.02em; line-height: 1; }
 .macro-unit { font-size: 14px; color: var(--text-muted); }
 .macro-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); font-family: 'DM Mono', monospace; margin-top: 4px; }
@@ -1134,6 +1106,7 @@ body {
         </tbody>
       </table>
     </div>
+
     <div class="section-label">Supplements — the non-negotiable stack</div>
     <div class="supp-grid">
       <div class="supp-card"><div class="supp-name">Creatine monohydrate</div><div class="supp-dose">5g every day</div><div class="supp-why">Strength, muscle volume, power output. Non-negotiable.</div></div>
@@ -1145,9 +1118,8 @@ body {
     </div>
 
     <div class="section-label">Phase-wise calorie strategy</div>
-    <div class="day-card lift" style="padding:0;">
-  <div class="table-scroll">
-    <table class="gym-table">
+    <div class="day-card lift" style="padding:0; overflow:hidden">
+      <table class="gym-table">
         <thead><tr><th>Phase</th><th>Duration</th><th>Calories</th><th>Goal</th></tr></thead>
         <tbody>
           <tr><td>Lean bulk</td><td>Months 1–4</td><td>+300–400 surplus</td><td>Gain 3–4 kg lean mass</td></tr>
