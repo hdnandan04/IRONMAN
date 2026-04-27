@@ -646,8 +646,29 @@ body {
 .prog-val { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text-dim); width: 65px; text-align: right; flex-shrink: 0; }
 
 /* DIET */
-.macro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 1rem; }
-.macro-card { background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; }
+.macro-grid {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+
+  overflow-x: auto;                 /* 🔥 enables horizontal scroll */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.macro-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.macro-card {
+  background: var(--card-bg);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+
+  min-width: 140px;   /* 🔥 important: prevents shrinking */
+  flex: 0 0 auto;     /* 🔥 keeps cards in one row */
+}
 .macro-num { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 0.02em; line-height: 1; }
 .macro-unit { font-size: 14px; color: var(--text-muted); }
 .macro-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-dim); font-family: 'DM Mono', monospace; margin-top: 4px; }
@@ -1081,7 +1102,31 @@ body {
         </tbody>
       </table>
     </div>
-
+    <div class="section-label">Ingredient-level breakdown (reference)</div>
+    <div class="day-card cycle" style="padding:0; overflow:hidden">
+      <table class="gym-table">
+        <thead><tr><th>Ingredient</th><th>Carbs</th><th>Protein</th></tr></thead>
+        <tbody>
+          <tr><td>Banana (1 medium)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">27g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">1.3g</td></tr>
+          <tr><td>Boiled potato (1 medium)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">27g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">2.5g</td></tr>
+          <tr><td>Whey protein (1 scoop)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">3g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">24g</td></tr>
+          <tr><td>Eggs (4 large)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">2.4g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">24g</td></tr>
+          <tr><td>Chana cooked (60g)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">16g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">5g</td></tr>
+          <tr><td>Rice cooked (1 cup)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">45g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">4g</td></tr>
+          <tr><td>Dal cooked (1 cup)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">20g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">8g</td></tr>
+          <tr><td>Soyabean dry (50g)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">15g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">26g</td></tr>
+          <tr><td>Soyabean dry (30g)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">9g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">15g</td></tr>
+          <tr><td>Curd (100g)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">4.7g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">3.5g</td></tr>
+          <tr><td>Bread (2 slices)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">24g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">6g</td></tr>
+          <tr><td>Honey (1 tbsp)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">17g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">0g</td></tr>
+          <tr><td>Dates (2–3)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">18g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">0.5g</td></tr>
+          <tr><td>Chapati (3)</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">54g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">9g</td></tr>
+          <tr><td>Sabzi mixed veg</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">10g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">2g</td></tr>
+          <tr><td>Milk 300ml</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">15g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">10g</td></tr>
+          <tr><td>Oats 50g</td><td style="font-family:'DM Mono',monospace;color:var(--cycle)">33g</td><td style="font-family:'DM Mono',monospace;color:var(--lift)">8g</td></tr>
+        </tbody>
+      </table>
+    </div>
     <div class="section-label">Supplements — the non-negotiable stack</div>
     <div class="supp-grid">
       <div class="supp-card"><div class="supp-name">Creatine monohydrate</div><div class="supp-dose">5g every day</div><div class="supp-why">Strength, muscle volume, power output. Non-negotiable.</div></div>
